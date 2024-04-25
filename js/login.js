@@ -30,4 +30,28 @@ async function login(email, password) {
 
     localStorage.setItem("profile", JSON.stringify(profile));
     localStorage.setItem("access-token", accessToken); 
+
+    const APIKeyRespons = await fetch (`${API_URL}/auth/create-api-key`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: `Barer ${accessToken}`,
+        },
+        body: JSON.stringify({
+            name: "User api key",
+        }),
+    });
+    const APIKeyResponsJSON = await APIKeyRespons.json(); 
+    const APIKey = APIKeyResponsJSON.data.key;
+    localStorage.setItem("api-key", APIKey);
+    localStorage.setItem("logged-in-email", email);
+
+    //Set the username in localStorage
+    localStorage.setItem("username", loggedInUsername);
+
+    return true; 
+}
+
+function isLoggedIn(email) {
+    return localStorage.getItem("logged-in-email") === email; 
 }
