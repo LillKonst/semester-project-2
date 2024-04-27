@@ -6,7 +6,7 @@ export { clearToken };
 
 
 
-const APIKey = "";
+const APIKey = "20893b22-d84f-4eb9-b4f2-93753fdedefe";
 localStorage.setItem("APIKey", APIKey);
 
 function storeToken(token) {

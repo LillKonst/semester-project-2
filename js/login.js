@@ -1,5 +1,7 @@
 import { API_URL } from "../js/modules/api.js"
 
+export { login };
+
 async function login(email, password) {
     if (!email.endsWith("@noroff.no") && !email.endsWith("stud.noroff.no")) {
         return false; 
@@ -55,3 +57,24 @@ async function login(email, password) {
 function isLoggedIn(email) {
     return localStorage.getItem("logged-in-email") === email; 
 }
+
+// login button 
+document.getElementById("login").addEventListener("submit", function (event) {
+    event.preventDefault();
+    const email = event.target[0].value;
+    const password = event.target[1].value;
+    login(email, password).then ((loggedIn) => {
+        if (loggedIn) {
+            window.location.href = "/html/home-loggedin.html";
+        } else {
+            alert("Invalid email or password. Please try again.");
+        }
+    });
+});
+
+// If user already logged in, go directly to logged in page
+window.addEventListener("load", () => {
+    if (localStorage.getItem("logged-in-email")) {
+        window.location.href = "/html/home-loggedin.html";
+    }
+});
