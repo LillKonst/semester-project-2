@@ -1,0 +1,51 @@
+@font-face {
+  font-family: "assistant";
+  src: url(../../fonts/Assistant-VariableFont_wght.ttf);
+}
+h1, h2, h3, h4, h5, h6, p {
+  font-family: "assistant";
+  color: #0D0630;
+}
+
+body {
+  background-color: #FFFBF6;
+}
+
+.nav-btn {
+  font-family: "assistant";
+  font-size: 1em;
+  color: #544B3D;
+  text-decoration: none;
+  padding: 20px;
+}
+
+.nav-btn:hover {
+  cursor: pointer;
+  color: #0D0630;
+  text-decoration: underline #DACAAA;
+}
+
+.nav-btn:active, .active {
+  font-weight: 600;
+  color: #0D0630;
+}
+
+.logo {
+  width: 140px;
+}
+
+.searchbar {
+  font-family: "assistant";
+  color: #DACAAA;
+  background-color: #FFFBF6;
+  border-color: #DACAAA;
+}
+
+.custom-btn {
+  background-color: #DACAAA;
+  color: #0D0630;
+  font-family: "assistant";
+  border-color: #DACAAA;
+}
+
+/*# sourceMappingURL=styles.css.map */

@@ -13,7 +13,7 @@ document
         if (registered) {
             login(email, password).then((loggedIn) => {
                 if (loggedIn) {
-                    window.location.href = "/html/home-loggedin.html";
+                    window.location.href = "/html/home.html";
                 } else {
                     alert("Invalid email or password. Please try again.");
                 }
