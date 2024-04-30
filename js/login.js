@@ -65,7 +65,7 @@ document.getElementById("login").addEventListener("submit", function (event) {
     const password = event.target[1].value;
     login(email, password).then ((loggedIn) => {
         if (loggedIn) {
-            window.location.href = "/html/home-loggedin.html";
+            window.location.href = "/html/home.html";
         } else {
             alert("Invalid email or password. Please try again.");
         }
@@ -75,6 +75,6 @@ document.getElementById("login").addEventListener("submit", function (event) {
 // If user already logged in, go directly to logged in page
 window.addEventListener("load", () => {
     if (localStorage.getItem("logged-in-email")) {
-        window.location.href = "/html/home-loggedin.html";
+        window.location.href = "/html/home.html";
     }
 });
