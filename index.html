@@ -23,6 +23,7 @@
     ></script>
 
     <script src="/js/login.js" type="module" defer></script>
+    <script src="/js/registerr.js" type="module" defer></script>
   </head>
   <body>
     <header class="d-flex">
@@ -39,7 +40,13 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link bg-primary text-secondary" href="#">Register</a>
+          <a
+            class="nav-link bg-primary text-secondary"
+            href="#"
+            data-bs-toggle="modal"
+            data-bs-target="#registerModal"
+            >Register</a
+          >
         </li>
         <li class="nav-item">
           <a class="nav-link disabled">Logout</a>
@@ -57,7 +64,7 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header position-relative">
-            <h5 class="modal-title mx-auto">Login</h5>
+            <h5 class="modal-title mx-auto">LOGIN</h5>
             <button
               type="button"
               class="btn-close position-absolute top-0 end-0 m-2"
@@ -66,32 +73,103 @@
             ></button>
           </div>
           <div class="modal-body">
-            <div class="mb-3">
-              <label for="exampleFormControlInput1" class="form-label"
-                >Email address</label
-              >
-              <input
-                type="email"
-                class="form-control"
-                id="exampleFormControlInput1"
-                placeholder="name@example.com"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label"
-                >Password</label
-              >
-              <input
-                type="password"
-                class="form-control"
-                id="formGroupExampleInput2"
-                placeholder="Your Password"
-              />
-            </div>
+            <form id="loginForm">
+              <div class="mb-3">
+                <label for="loginInput1" class="form-label"
+                  >Email address</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="loginInput1"
+                  placeholder="name@example.com"
+                  autocomplete="current-email"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="loginInput2" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="loginInput2"
+                  placeholder="Your Password"
+                  autocomplete="current-password"
+                />
+              </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="login">
-              Login
+            <button type="submit" class="btn btn-primary" id="login">
+              LOGIN
+            </button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal"
+      tabindex="-1"
+      id="registerModal"
+      aria-labelledby="registerModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header position-relative">
+            <h5 class="modal-title mx-auto">REGISTER</h5>
+            <button
+              type="button"
+              class="btn-close position-absolute top-0 end-0 m-2"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="registerForm">
+              <div class="mb-3">
+                <label for="registerInput1" class="form-label">Name:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="registerInput1"
+                  placeholder="Your Name"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="registerInput2" class="form-label"
+                  >Email address</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="registerInput2"
+                  placeholder="name@example.com"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="registerInput3" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="registerInput3"
+                  placeholder="Your Password"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="registerInput4" class="form-label">Avatar:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="registerInput4"
+                  placeholder="Image URL"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="register">
+              REGISTER
             </button>
           </div>
         </div>
