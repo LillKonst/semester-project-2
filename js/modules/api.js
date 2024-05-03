@@ -11,7 +11,7 @@ export const API_URL = "https://v2.api.noroff.dev";
 async function getAllListings(newestFirst = true) {
     const defaultOrder = newestFirst ? "desc" : "asc";
     const response = await fetch(
-      `${NOROFF_API_URL}/auction/listings`,
+      `${API_URL}/auction/listings`,
       {
         headers: {
           "Content-Type": "application/json",
