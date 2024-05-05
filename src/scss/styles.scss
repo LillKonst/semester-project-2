@@ -11,6 +11,7 @@ $quaternary :#544B3D;
 h1, h2, h3, h4, h5, h6, p {
     font-family: "assistant";
     color: $primary;
+    margin: 0px !important;
 }
 
 body {
@@ -60,3 +61,24 @@ body {
     border-color: $secondary;
     
 }
+
+
+.card-custom {
+    background-color: $tertiary;
+    border: none;
+    padding: 0;
+}
+
+.border-custom {
+    border-color: $secondary !important;
+}
+
+.card-img-custom {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    height: 200px;
+    object-fit: cover;
+}
+

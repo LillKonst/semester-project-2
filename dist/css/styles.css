@@ -5,6 +5,7 @@
 h1, h2, h3, h4, h5, h6, p {
   font-family: "assistant";
   color: #0D0630;
+  margin: 0px !important;
 }
 
 body {
@@ -46,6 +47,25 @@ body {
   color: #0D0630;
   font-family: "assistant";
   border-color: #DACAAA;
+}
+
+.card-custom {
+  background-color: #FFFBF6;
+  border: none;
+  padding: 0;
+}
+
+.border-custom {
+  border-color: #DACAAA !important;
+}
+
+.card-img-custom {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  height: 200px;
+  object-fit: cover;
 }
 
 /*# sourceMappingURL=styles.css.map */
