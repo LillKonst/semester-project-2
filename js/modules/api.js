@@ -76,7 +76,7 @@ async function fetchProfile(username) {
         method: "Post",
         headers: {
             "Content-Type": "application/json",
-             Authorization: `Bearer ${getToken}`,
+             Authorization: `Bearer ${getToken()}`,
              "X-Noroff-API-Key": APIKey,
           },
           body: JSON.stringify(listingData),

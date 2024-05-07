@@ -48,13 +48,14 @@ function getFormData() {
     const imageInput = document.getElementById("newListingInput3").value; 
     const endsAt = document.getElementById("newListingInput4").value; 
 
+    const imageUrls = imageInput.split(",").map(url => url.trim());
+    const mediaObjects = imageUrls.map(url => ({ url }));
+
     return {
-        title,
-        description,
-        media: {
-            url: imageInput,
-        },
-        endsAt
+      title,
+      description,
+      media: mediaObjects, 
+      endsAt
     };
 }
 
@@ -66,7 +67,6 @@ async function handleFormSubmission(event) {
 
     try {
         const data = await createListing(listingData);
-        window.location.reload();
         alert("Listing created successfully!");
     } catch (error) {
         console.error(error);

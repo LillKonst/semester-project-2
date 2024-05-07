@@ -1,4 +1,5 @@
 import { fetchProfile, fetchListingsByUser } from "./modules/api.js";
+import { MAX_TEXT_LENGTH } from "../home.js";
 
 async function displayUserProfile() {
     try {
