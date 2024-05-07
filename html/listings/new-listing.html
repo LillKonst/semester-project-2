@@ -41,49 +41,63 @@
       </ul>
     </header>
     <main class="mx-5 px-3">
-     <div class="container">
-            <form id="newListingForm">
-              <div class="mb-3">
-                <label for="newListingInput1" class="form-label">Title:</label>
-                <input
-                  type="text"
-                  class="form-control border-custom inputs"
-                  id="newListingInput1"
-                  placeholder="Title"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="newListingTextarea1" class="form-label"
-                  >Description</label
-                >
-                <textarea class="form-control border-custom inputs" id="newListingTextarea1" rows="3" placeholder="Describe your listing ..."></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="newListingInput3" class="form-label">Upload Images</label>
-                <input
-                type="text"
-                class="form-control border-custom inputs"
-                id="newListingInput3"
-                placeholder="Image URL"
-              />
-              </div>
-              <!-- <div class="mb-3">
+      <div class="container">
+        <form id="newListingForm">
+          <div class="mb-3">
+            <label for="newListingInput1" class="form-label">Title:</label>
+            <input
+              type="text"
+              class="form-control border-custom inputs"
+              id="newListingInput1"
+              placeholder="Title"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="newListingTextarea1" class="form-label"
+              >Description</label
+            >
+            <textarea
+              class="form-control border-custom inputs"
+              id="newListingTextarea1"
+              rows="3"
+              placeholder="Describe your listing ..."
+            ></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="newListingInput3" class="form-label"
+              >Upload Images</label
+            >
+            <input
+              type="text"
+              class="form-control border-custom inputs"
+              id="newListingInput3"
+              placeholder="Image URL"
+            />
+          </div>
+          <!-- <div class="mb-3">
                 <label for="media" class="form-label">Media Gallery</label>
                 <input type="file" class="form-control" id="media" name="media" accept="image/*" multiple>
                 <small id="mediaHelp" class="form-text text-muted">Select one or multiple images.</small>
             </div> -->
-           
-              <div class="mb-3">
-                <label for="newListingInput4" class="form-label">Bidding will end:</label>
-                <input type="datetime-local" class="form-control border-custom inputs" id="newListingInput4" name="deadline" required>
-            </div>
-        
-            <button type="submit" class="btn btn-primary custom-btn" id="upload">
-              UPLOAD
-            </button>
 
+          <div class="mb-3">
+            <label for="newListingInput4" class="form-label"
+              >Bidding will end:</label
+            >
+            <input
+              type="datetime-local"
+              class="form-control border-custom inputs"
+              id="newListingInput4"
+              name="deadline"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary custom-btn" id="upload">
+            UPLOAD
+          </button>
         </form>
-    </div>
+      </div>
     </main>
   </body>
 </html>

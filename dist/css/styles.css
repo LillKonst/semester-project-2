@@ -72,4 +72,13 @@ body {
   background-color: #FFFBF6;
 }
 
+.profile-img-container {
+  width: 100px;
+  height: 100px;
+}
+
+a {
+  text-decoration: none;
+}
+
 /*# sourceMappingURL=styles.css.map */

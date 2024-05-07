@@ -67,6 +67,7 @@ async function handleFormSubmission(event) {
 
     try {
         const data = await createListing(listingData);
+        window.location.href = "/html/profile/index.html";
         alert("Listing created successfully!");
     } catch (error) {
         console.error(error);

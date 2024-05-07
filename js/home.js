@@ -39,11 +39,22 @@ async function displayListings() {
             cardInner.classList.add("card", "card-body", "mx-auto", "card-custom");
             listingCard.appendChild(cardInner);
 
-            const image = document.createElement("img");
-            image.setAttribute("src", listing.media[0].url);
-            image.setAttribute("alt", listing.media[0].alt);
-            image.classList.add("card-img", "card-img-custom", "h-200");
-            cardInner.appendChild(image); 
+            if (listing.media && listing.media.length > 0) {
+                const image = document.createElement("img");
+                image.setAttribute("src", listing.media[0].url);
+                image.setAttribute("alt", listing.media[0].alt);
+                image.classList.add("card-img", "card-img-custom", "h-200");
+                cardInner.appendChild(image); 
+            } else {
+                const defaultImageUrl = "https://images.unsplash.com/photo-1515405295579-ba7b45403062?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+                const defaultAltText = "Default Avatar";
+            
+                const image = document.createElement("img");
+                image.setAttribute("src", defaultImageUrl);
+                image.setAttribute("alt", defaultAltText);
+                image.classList.add("card-img", "card-img-custom", "h-200");
+                cardInner.appendChild(image); 
+            }
             
             const listingInfo = document.createElement("div");
             listingInfo.classList.add("d-flex", "justify-content-center", "border", "border-top-0", "rounded-bottom", "border-0.5", "border-custom", "p-2");

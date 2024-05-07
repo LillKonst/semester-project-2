@@ -1,5 +1,7 @@
 import { fetchProfile, fetchListingsByUser } from "./modules/api.js";
-import { MAX_TEXT_LENGTH } from "../home.js";
+import { MAX_TEXT_LENGTH } from "../js/home.js";
+
+export { displayUserProfile };
 
 async function displayUserProfile() {
     try {
@@ -22,7 +24,7 @@ async function displayUserProfile() {
             profileImage.alt = userProfile.avatar.alt;
             console.log("Displayed user's avatar.");
         } else {
-            profileImage.src = "/images/kompis.JPG";
+            profileImage.src = "https://images.unsplash.com/photo-1515405295579-ba7b45403062?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
             profileImage.alt = "Default Avatar";
             console.log("Displayed default avatar.");
         }

@@ -4,6 +4,7 @@ export { getAllListings };
 export { fetchProfile };
 export { fetchListingsByUser };
 export { createListing };
+export { updateAvatar };
 
 //export { API_URL }; 
 
@@ -89,3 +90,35 @@ async function fetchProfile(username) {
       const result = await response.json();
       return result.data;
     }
+
+    // Update avatar
+    async function updateAvatar(username, profileImgUrl) {
+        try {
+          const response = await fetch(
+            `${API_URL}/auction/profiles/${username}`,
+            {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${getToken()}`,
+                "X-Noroff-API-Key": APIKey,
+              },
+              body: JSON.stringify({
+                avatar: {
+                  url: profileImgUrl,
+                  alt: "Profile Image",
+                },
+              }),
+            }
+          );
+      
+          if (!response.ok) {
+            throw new Error("Failed to update profile image");
+          }
+      
+          // Profile image updated successfully
+          console.log("Profile image updated successfully");
+        } catch (error) {
+          console.error("Error updating profile image:", error.message);
+        }
+      }
