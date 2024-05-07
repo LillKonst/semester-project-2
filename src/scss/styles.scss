@@ -94,3 +94,17 @@ body {
 a {
     text-decoration: none;
 }
+
+.background-color {
+    background-color: $tertiary;
+}
+
+.login-btn {
+    color: $primary;
+    text-decoration: none;
+
+    &:hover {
+        color: $primary;
+        text-decoration: underline;
+    }
+}

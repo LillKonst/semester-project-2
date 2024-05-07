@@ -5,6 +5,7 @@ export { fetchProfile };
 export { fetchListingsByUser };
 export { createListing };
 export { updateAvatar };
+export { getListingSpecific };
 
 //export { API_URL }; 
 
@@ -91,34 +92,53 @@ async function fetchProfile(username) {
       return result.data;
     }
 
-    // Update avatar
-    async function updateAvatar(username, profileImgUrl) {
-        try {
-          const response = await fetch(
-            `${API_URL}/auction/profiles/${username}`,
-            {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${getToken()}`,
-                "X-Noroff-API-Key": APIKey,
-              },
-              body: JSON.stringify({
-                avatar: {
-                  url: profileImgUrl,
-                  alt: "Profile Image",
-                },
-              }),
-            }
-          );
-      
-          if (!response.ok) {
-            throw new Error("Failed to update profile image");
-          }
-      
-          // Profile image updated successfully
-          console.log("Profile image updated successfully");
-        } catch (error) {
-          console.error("Error updating profile image:", error.message);
-        }
+// Update avatar
+async function updateAvatar(username, newProfileImgUrl) {
+  try {
+      const response = await fetch(
+       `${API_URL}/auction/profiles/${username}`,
+      {
+        method: "PUT",
+        headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+        "X-Noroff-API-Key": APIKey,
+        },
+        body: JSON.stringify({
+          avatar: {
+            url: newProfileImgUrl,
+            alt: "Profile Image",
+          },
+        }),
       }
+      );
+      
+  if (!response.ok) {
+    throw new Error("Failed to update profile image");
+  }
+      
+   // Profile image updated successfully
+  console.log("Profile image updated successfully");
+  } catch (error) {
+    console.error("Error updating profile image:", error.message);
+  }
+}
+
+// Get post specific
+async function getListingSpecific() {
+  const response = await fetch(
+    `${API_URL}/auction/listings/${listingId}?_seller=true&_bids=true`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+        "X-Noroff-API-Key": APIKey,
+      },
+    }
+  );
+  if (!response.ok) {
+    throw new Error("Could not load post");
+  }
+  const result = await response.json();
+  return result.data;
+}

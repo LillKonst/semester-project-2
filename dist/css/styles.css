@@ -81,4 +81,17 @@ a {
   text-decoration: none;
 }
 
+.background-color {
+  background-color: #FFFBF6;
+}
+
+.login-btn {
+  color: #0D0630;
+  text-decoration: none;
+}
+.login-btn:hover {
+  color: #0D0630;
+  text-decoration: underline;
+}
+
 /*# sourceMappingURL=styles.css.map */

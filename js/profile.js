@@ -8,7 +8,6 @@ async function displayUserProfile() {
         console.log("Fetching user's profile...");
         const loggedInUser = JSON.parse(localStorage.getItem("profile"));
         const username = loggedInUser.name;
-        console.log("Username:", username);
 
         console.log("Fetching profile data for user:", username);
         const userProfile = await fetchProfile(username);
@@ -17,6 +16,10 @@ async function displayUserProfile() {
         const userName = document.getElementById("userName");
         userName.textContent = username;
         console.log("Displaying username:", username);
+
+        const credit = userProfile.credits;
+        const creditElement = document.getElementById("credit");
+        creditElement.innerHTML = `Credit: ${credit}`;
 
         const profileImage = document.getElementById("profileImage");
         if (userProfile.avatar && userProfile.avatar.url) {
@@ -47,7 +50,7 @@ async function displayListingsByUser(username) {
                 const listingCard = document.createElement("div");
                 listingCard.classList.add("col-md-4", "col-sm-10", "p-2", "card-custom")
                 listingCard.addEventListener("click", () => {
-                    window.location.href = `/html/listing/index.html?id=${listing.id}&title=${listing.title.rendered}`;
+                    window.location.href = `../html/listings/index.html?id=${listing.data.id}&title=${listing.data.title}`;
                 });
                 listingsContainer.appendChild(listingCard);
                 listingCard.style.cursor = "pointer";

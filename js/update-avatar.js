@@ -1,29 +1,30 @@
 import { updateAvatar } from "../js/modules/api.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Get reference to the update button
-  const updateBtn = document.getElementById("update");
+  const updateBtn = document.getElementById("updateProfile");
 
-  // Add event listener to the update button
   updateBtn.addEventListener("click", async () => {
-      try {
-          // Get the new profile image URL from the input field
-          const newProfileImgUrl = document.getElementById("updateInput1").value;
-
-          // Retrieve the username of the logged-in user from localStorage
-          const loggedInUser = JSON.parse(localStorage.getItem("profile"));
-          const username = loggedInUser.name;
-
-          // Update the profile image
-          await updateAvatar(username, newProfileImgUrl);
-
-          // Log success message
-          alert("Profile image updated successfully");
-
-          // Clear the input field
-          document.getElementById("updateInput1").value = "";
-      } catch (error) {
-          console.error("Error updating profile image:", error);
+    try {
+      const newImageUrl = document.getElementById("updateInput1").value;
+      const loggedInUser = JSON.parse(localStorage.getItem("profile"));
+      
+      if (!loggedInUser) {
+        throw new Error("User is not logged in.");
       }
+
+      const username = loggedInUser.name;
+      const success = await updateAvatar(username, { avatar: newImageUrl });
+
+      if (success) {
+        alert("Profile image updated successfully.");
+      } else {
+        throw new Error("Failed to update profile image.");
+      }
+
+      // Clear the input field
+      document.getElementById("updateInput1").value = "";
+    } catch (error) {
+      console.error("Error updating profile image:", error);
+    }
   });
 });
