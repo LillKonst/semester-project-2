@@ -30,7 +30,7 @@ async function displayListings() {
             const listingCard = document.createElement("div");
             listingCard.classList.add("col-md-4", "col-sm-10", "p-2", "card-custom")
             listingCard.addEventListener("click", () => {
-                window.location.href = `/html/listings/index.html?id=${listing.data.id}`;
+                window.location.href = `../listings/index.html?id=${listing.id}&title=${listing.title}`;
             });
             allListingsContainer.appendChild(listingCard);
             listingCard.style.cursor = "pointer";

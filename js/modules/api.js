@@ -125,7 +125,7 @@ async function updateAvatar(username, newProfileImgUrl) {
 }
 
 // Get post specific
-async function getListingSpecific() {
+async function getListingSpecific(listingId) {
   const response = await fetch(
     `${API_URL}/auction/listings/${listingId}?_seller=true&_bids=true`,
     {
