@@ -1,84 +1,5 @@
-// import { getListingSpecific } from "../modules/api.js";
-
-// export { username };
-// export { getListingIdFromQuery };
-
-// function getListingIdFromQuery() {
-//   const urlParams = new URLSearchParams(window.location.search);
-//   return urlParams.get("id");
-// }
-
-// const username = localStorage.getItem(`userName`);
-
-// async function listingData() {
-//   const listingId = getListingIdFromQuery();
-//   const errorContainer = document.querySelector(".postData-error");
-
-//   if (!listingId) {
-//     errorContainer.textContent =
-//       "We are unable to find the requested post. Please check the URL or go back to the homepage to continue browsing.";
-//     return;
-//   }
-
-//   try {
-//     const listingData = await getListingSpecific(listingId);
-//     displayListing(listingData);
-//   } catch (error) {
-//     console.error("Error fetching post details:", error);
-//     errorContainer.textContent =
-//       "There seems to be an issue loading the post details.";
-//   }
-// }
-
-// // LoadPostData in DOM
-// document.addEventListener("DOMContentLoaded", listingData);
-
-// async function displayListing(listing) {
-//   const listingId = getListingIdFromQuery();
-//   if (!listingId) {
-//     showError("Blog post is not found");
-//     return;
-//   }
-
-//   try {
-//     const listingData = await getListingSpecific(listingId);
-//     displayListing(listingData);
-
-//     const titleElement = document.getElementById("title");
-
-//     const listingDisplay = document.getElementById("listing-container");
-
-//     titleElement.textContent = listing.title || "No Title";
-
-//     const cardInner = document.createElement("div");
-//     cardInner.classList.add("card", "card-body", "mx-auto", "post-card-custom");
-//     listingDisplay.appendChild(cardInner);
-
-//     if (listing.media && listing.media.length > 0) {
-//         const image = document.createElement("img");
-//         image.setAttribute("src", listing.media[0].url);
-//         image.setAttribute("alt", listing.media[0].alt);
-//         image.classList.add("card-img", "card-img-custom", "h-200");
-//         cardInner.appendChild(image); 
-//     } else {
-//         const defaultImageUrl = "https://images.unsplash.com/photo-1515405295579-ba7b45403062?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-//         const defaultAltText = "Default Avatar";
-
-//         const image = document.createElement("img");
-//         image.setAttribute("src", defaultImageUrl);
-//         image.setAttribute("alt", defaultAltText);
-//         image.classList.add("card-img", "card-img-custom", "h-200");
-//         cardInner.appendChild(image); 
-//     }
-
-//   } catch (error) {
-//     error.message;
-//   }
-// }
-
-
-
 import { getListingSpecific } from "../modules/api.js";
+import { displayUserProfile } from "../profile.js";
 
 const username = localStorage.getItem(`userName`);
 
@@ -206,120 +127,120 @@ async function displayListing(listing) {
         imageContainer.appendChild(image);
       }
 
-      const listingDetails = document.createElement("div");
-      listingDetails.classList.add("row");
-      listingDisplay.appendChild(listingDetails);
+    const infoContainer = document.createElement("div");
+    infoContainer.classList.add("row");
+    listingDisplay.appendChild(infoContainer);
 
-      const listingInfo = document.createElement("div");
-      listingInfo.classList.add("col-8");
-      listingDetails.appendChild(listingInfo);
+    const listingDetails = document.createElement("div");
+    listingDetails.classList.add("col-8");
+    infoContainer.appendChild(listingDetails);
 
-      const listingBiddingInfo = document.createElement("div");
-      listingBiddingInfo.classList.add("col-4");
-      listingDetails.appendChild(listingBiddingInfo);
+      const sellerContainer = document.createElement("div");
+      sellerContainer.classList.add("col-4");
+      listingDetails.appendChild(sellerContainer);
+
+      const seller = document.createElement("p");
+      seller.innerHTML = `Seller:`;
+      sellerContainer.appendChild(seller);
+
+      const userContainer = document.createElement("div");
+      userContainer.classList.add("d-flex", "flex-row");
+      sellerContainer.appendChild(userContainer);
+
+    //   const sellerImage = document.createElement("img");
+    //   sellerImage.classList.add("w-14", "h-14", "rounded-full", "object-cover");
+    //   if (listing.seller.avatar && listing.seller.avatar.url) {
+    //       sellerImage.src = listing.seller.avatar.url;
+    //       sellerImage.alt = listing.seller.avatar.alt;
+    //   } else {
+    //     sellerImage.src = "https://images.unsplash.com/photo-1515405295579-ba7b45403062?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+    //     sellerImage.alt = "Default Avatar";
+    //   }
+    //   userContainer.appendChild(sellerImage);
 
 
-      const listingDescription = document.createElement("p");
-      listingDescription.classList.add("card-text", "p-1", "mb-2");
-      listingDescription.innerHTML = listing.description || "No Description";
-      listingInfo.appendChild(listingDescription);
+      const listingSeller = document.createElement("h4");
+      listingSeller.innerHTML = listing.seller.name;
+      sellerContainer.appendChild(listingSeller);
+
+    const horizontalLine = document.createElement("hr");
+    listingDetails.appendChild(horizontalLine);
+
+    
+    
+    const listingDescription = document.createElement("p");
+    listingDescription.classList.add("card-text", "p-1", "mb-2");
+    listingDescription.innerHTML = listing.description || "No Description";
+    listingDetails.appendChild(listingDescription);
+
+    const listingEndsAt = document.createElement("p");
+    const timeDate = new Date(listing.endsAt);
+    const formattedDate = timeDate.toLocaleDateString();
+    const formattedTime = timeDate.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        });
+    listingEndsAt.classList.add("p-1", "fs-7", "fw-bold");
+    listingEndsAt.innerHTML = `Ends at: ${formattedDate} ${formattedTime}`;
+    listingDetails.appendChild(listingEndsAt);
+
+    const bidBtn = document.createElement("button");
+    bidBtn.classList.add("custom-btn");
+    bidBtn.innerHTML = `PLACE A BID`;
+    listingDetails.appendChild(bidBtn);
+
+    const bidContainer = document.createElement("div");
+    bidContainer.classList.add("container", "col-4");
+    infoContainer.appendChild(bidContainer);
+
+    const bidBox = document.createElement("div");
+    bidBox.classList.add("custom-btn", "d-flex", "flex-column", "justify-content-center", "align-items-center");
+    bidContainer.appendChild(bidBox);
+
+    const listingBidsText = document.createElement("p");
+    listingBidsText.classList.add("fs-7", "fw-bold");
+    listingBidsText.innerHTML = `Current Bids:`;
+    bidBox.appendChild(listingBidsText);
+
+    const listingNumberOfBids = document.createElement("h3");
+    listingNumberOfBids.classList.add("fs-1");
+    listingNumberOfBids.innerHTML = listing._count.bids;
+    bidBox.appendChild(listingNumberOfBids);
+
+    const bidHistory = document.createElement("p");
+    bidHistory.innerHTML = `Bid history (${listing._count.bids})`;
+    bidContainer.appendChild(bidHistory);
+
+
+    //   const listingBiddingInfo = document.createElement("div");
+    //   listingBiddingInfo.classList.add("col-4");
+    //   listingDetails.appendChild(listingBiddingInfo);
+
+
+    //   const listingDescription = document.createElement("p");
+    //   listingDescription.classList.add("card-text", "p-1", "mb-2");
+    //   listingDescription.innerHTML = listing.description || "No Description";
+    //   listingInfo.appendChild(listingDescription);
   
-      const listingEndsAt = document.createElement("p");
-      const timeDate = new Date(listing.endsAt);
-      const formattedDate = timeDate.toLocaleDateString();
-      const formattedTime = timeDate.toLocaleTimeString([], {
-            hour: "2-digit",
-            minute: "2-digit",
-            });
-      listingEndsAt.classList.add("p-1", "fs-7", "fw-bold");
-      listingEndsAt.innerHTML = `Bidding ends:${formattedDate} ${formattedTime}`;
-      listingInfo.appendChild(listingEndsAt);
+    //   const listingEndsAt = document.createElement("p");
+    //   const timeDate = new Date(listing.endsAt);
+    //   const formattedDate = timeDate.toLocaleDateString();
+    //   const formattedTime = timeDate.toLocaleTimeString([], {
+    //         hour: "2-digit",
+    //         minute: "2-digit",
+    //         });
+    //   listingEndsAt.classList.add("p-1", "fs-7", "fw-bold");
+    //   listingEndsAt.innerHTML = `Bidding ends:${formattedDate} ${formattedTime}`;
+    //   listingInfo.appendChild(listingEndsAt);
 
-      const listingBidsText = document.createElement("p");
-      listingBidsText.classList.add("fs-7", "fw-bold");
-      listingBidsText.innerHTML = `Bids:`;
-      listingBiddingInfo.appendChild(listingBidsText);
+    //   const listingBidsText = document.createElement("p");
+    //   listingBidsText.classList.add("fs-7", "fw-bold");
+    //   listingBidsText.innerHTML = `Bids:`;
+    //   listingBiddingInfo.appendChild(listingBidsText);
 
-      const listingNumberOfBids = document.createElement("h3");
-      listingNumberOfBids.classList.add("fs-1");
-      listingNumberOfBids.innerHTML = listing._count.bids;
-      listingBiddingInfo.appendChild(listingNumberOfBids);
+    //   const listingNumberOfBids = document.createElement("h3");
+    //   listingNumberOfBids.classList.add("fs-1");
+    //   listingNumberOfBids.innerHTML = listing._count.bids;
+    //   listingBiddingInfo.appendChild(listingNumberOfBids);
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { getListingSpecific } from "../modules/api.js";
-
-// function getListingIdFromQuery() {
-//     const urlParams = new URLSearchParams(window.location.search);
-//     return urlParams.get("id");
-// }
-
-// async function loadListingData() {
-//     const listingId = getListingIdFromQuery();
-//     const errorContainer = document.querySelector(".postData-error");
-
-//     if (!listingId) {
-//         errorContainer.textContent = "We are unable to find the requested listing. Please check the URL or go back to the homepage to continue browsing.";
-//         return;
-//     }
-
-//     try {
-//         const listing = await getListingSpecific(listingId);
-//         if (!listing) {
-//             throw new Error("Listing data not found");
-//         }
-//         displayListing(listing);
-//     } catch (error) {
-//         console.error("Error fetching listing details:", error);
-//         errorContainer.textContent = "There seems to be an issue loading the listing details. Please try again later.";
-//     }
-// }
-
-// function displayListing(listing) {
-//     const titleElement = document.getElementById("title");
-//     const authorElement = document.getElementById("author");
-
-//     if (titleElement && authorElement) {
-//         titleElement.textContent = listing?.title || "No Title";
-//         authorElement.textContent = listing?.author?.name || "Unknown";
-
-//         authorElement.style.cursor = "pointer";
-//         authorElement.addEventListener("click", function () {
-//             // Redirect user to the profile page
-//             const userProfileUrl = `/html/profile/index.html?username=${listing?.author?.name}`;
-//             window.location.href = userProfileUrl;
-//         });
-//     } else {
-//         console.error("One or more DOM elements not found.");
-//     }
-// }
-
-// // Load listing data when the DOM is loaded
-// document.addEventListener("DOMContentLoaded", loadListingData);
