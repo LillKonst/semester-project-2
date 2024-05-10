@@ -39,9 +39,31 @@
           <a class="nav-btn" id="logout">LOG OUT</a>
         </li>
       </ul>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list d-none" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+      </svg>
     </header>
-    <main class="mx-5 px-3">
-      <div id="listing-container">
+    <section>
+      <div id="bid-history-modal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header background-color d-flex justify-content-center align-items-center text-center">
+              <h5 class="modal-title text-center color-primary">BID HISTORY</h5>
+              <button
+                type="button"
+                class="btn-close color-primary"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div id="bid-history" class="modal-body background-color"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <main class="mx-md-5">
+      <div class="d-flex justify-content-center align-items-center">
+        <div id="listing-container" class="col-lg-8 col-md-10 col-sm-12"></div>
       </div>
     </main>
     <footer>

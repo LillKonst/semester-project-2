@@ -82,16 +82,34 @@ async function displayListings() {
             listingDescription.innerHTML = truncatedText || "No Description";
             listingText.appendChild(listingDescription);
 
-            const listingEndsAt = document.createElement("p");
-            const timeDate = new Date(listing.endsAt);
-            const formattedDate = timeDate.toLocaleDateString();
-            const formattedTime = timeDate.toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit",
-            });
-            listingEndsAt.classList.add("p-1", "fs-7", "fw-bold");
-            listingEndsAt.innerHTML = `Bidding ends:${formattedDate} ${formattedTime}`;
-            listingText.appendChild(listingEndsAt);
+            // const listingEndsAt = document.createElement("p");
+            // const timeDate = new Date(listing.endsAt);
+            // const formattedDate = timeDate.toLocaleDateString();
+            // const formattedTime = timeDate.toLocaleTimeString([], {
+            //     hour: "2-digit",
+            //     minute: "2-digit",
+            // });
+            // listingEndsAt.classList.add("p-1", "fs-7", "fw-bold");
+            // listingEndsAt.innerHTML = `Bidding ends:${formattedDate} ${formattedTime}`;
+            // listingText.appendChild(listingEndsAt);
+
+               // Assuming the 'endsAt' field is available in the 'listing' object
+const endsAt = new Date(listing.endsAt);
+
+// Create a paragraph element for the date
+const listingDate = document.createElement("p");
+listingDate.classList.add("fs-7", "fw-bold");
+listingDate.textContent = `Bidding ends: ${endsAt.toLocaleDateString()}`;
+listingText.appendChild(listingDate);
+
+// Create a paragraph element for the time
+const listingTime = document.createElement("p");
+listingTime.classList.add("fs-7", "fw-bold");
+listingTime.textContent = `At: ${endsAt.toLocaleTimeString([], {
+    hour: "2-digit",
+    minute: "2-digit",
+})}`;
+listingText.appendChild(listingTime);
 
             const listingBids = document.createElement("div");
             listingBids.classList.add("col-3", "d-flex", "justify-content-center", "align-items-center", "flex-column", "border-start", "border-0.5", "border-custom", "my-3")

@@ -6,6 +6,7 @@ export { fetchListingsByUser };
 export { createListing };
 export { updateAvatar };
 export { getListingSpecific };
+export { listingBid };
 
 //export { API_URL }; 
 
@@ -141,4 +142,29 @@ async function getListingSpecific(listingId) {
   }
   const result = await response.json();
   return result.data;
+}
+
+// Make a bid
+async function listingBid(listingId) {
+ 
+
+  const response = await fetch(
+    `${API_URL}/auction/listings/${listingId}/_bids`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+        "X-Noroff-API-Key": APIKey,
+      },
+      body: JSON.stringify(bidData),
+    }
+  );
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(`Could not post comment: ${errorData.message}`);
+  }
+
+  return await response.json();
 }

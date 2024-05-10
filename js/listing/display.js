@@ -1,5 +1,4 @@
 import { getListingSpecific } from "../modules/api.js";
-import { displayUserProfile } from "../profile.js";
 
 const username = localStorage.getItem(`userName`);
 
@@ -40,11 +39,12 @@ async function displayListing(listing) {
   listingDisplay.appendChild(topContainer);
 
     const listingTitle = document.createElement("h2");
-    listingTitle.classList.add("card-title", "p-1", "fs-4");
+    listingTitle.classList.add("card-title", "p-1", "fs-4", "fw-bold", "m-2");
     listingTitle.innerHTML = listing.title || "No Title";
     topContainer.appendChild(listingTitle);
 
     const imageContainer = document.createElement("div");
+    imageContainer.classList.add("mx-3");
     listingDisplay.appendChild(imageContainer);
 
 
@@ -54,7 +54,7 @@ async function displayListing(listing) {
           const image = document.createElement("img");
           image.setAttribute("src", listing.media[0].url);
           image.setAttribute("alt", listing.media[0].alt);
-          image.classList.add("card-img", "card-img-custom", "h-300");
+          image.classList.add("rounded", "w-100", "h-350px", "object-cover", "listing-img");
           imageContainer.appendChild(image);
         } else {
           // If there are multiple images, create a carousel
@@ -127,120 +127,176 @@ async function displayListing(listing) {
         imageContainer.appendChild(image);
       }
 
-    const infoContainer = document.createElement("div");
-    infoContainer.classList.add("row");
-    listingDisplay.appendChild(infoContainer);
-
-    const listingDetails = document.createElement("div");
-    listingDetails.classList.add("col-8");
-    infoContainer.appendChild(listingDetails);
-
       const sellerContainer = document.createElement("div");
-      sellerContainer.classList.add("col-4");
-      listingDetails.appendChild(sellerContainer);
+      sellerContainer.classList.add("col-8", "pt-3", "mx-4");
+      listingDisplay.appendChild(sellerContainer);
 
-      const seller = document.createElement("p");
-      seller.innerHTML = `Seller:`;
-      sellerContainer.appendChild(seller);
+    //   const seller = document.createElement("p");
+    //   seller.classList.add("fs-7", "fw-bold");
+    //   seller.innerHTML = `Seller:`;
+    //   sellerContainer.appendChild(seller);
 
       const userContainer = document.createElement("div");
-      userContainer.classList.add("d-flex", "flex-row");
+      userContainer.classList.add("row");
       sellerContainer.appendChild(userContainer);
 
-    //   const sellerImage = document.createElement("img");
-    //   sellerImage.classList.add("w-14", "h-14", "rounded-full", "object-cover");
-    //   if (listing.seller.avatar && listing.seller.avatar.url) {
-    //       sellerImage.src = listing.seller.avatar.url;
-    //       sellerImage.alt = listing.seller.avatar.alt;
-    //   } else {
-    //     sellerImage.src = "https://images.unsplash.com/photo-1515405295579-ba7b45403062?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-    //     sellerImage.alt = "Default Avatar";
-    //   }
-    //   userContainer.appendChild(sellerImage);
+      const sellerImage = document.createElement("img");
+      sellerImage.classList.add("custom-profile-img", "col-4");
+      if (listing.seller.avatar && listing.seller.avatar.url) {
+          sellerImage.src = listing.seller.avatar.url;
+          sellerImage.alt = listing.seller.avatar.alt;
+      } else {
+        sellerImage.src = "https://images.unsplash.com/photo-1515405295579-ba7b45403062?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+        sellerImage.alt = "Default Avatar";
+      }
+      userContainer.appendChild(sellerImage);
 
 
       const listingSeller = document.createElement("h4");
+      listingSeller.classList.add("col-8", "mt-3", "p-0");
       listingSeller.innerHTML = listing.seller.name;
-      sellerContainer.appendChild(listingSeller);
+      userContainer.appendChild(listingSeller);
+
+      const infoContainer = document.createElement("div");
+      infoContainer.classList.add("row", "mx-3");
+      listingDisplay.appendChild(infoContainer);
+  
+      const listingDetails = document.createElement("div");
+      listingDetails.classList.add("col-8");
+      infoContainer.appendChild(listingDetails);
 
     const horizontalLine = document.createElement("hr");
+    horizontalLine.classList.add("custom-line");
     listingDetails.appendChild(horizontalLine);
 
     
     
     const listingDescription = document.createElement("p");
-    listingDescription.classList.add("card-text", "p-1", "mb-2");
+    listingDescription.classList.add("card-text", "p-3");
     listingDescription.innerHTML = listing.description || "No Description";
     listingDetails.appendChild(listingDescription);
 
-    const listingEndsAt = document.createElement("p");
-    const timeDate = new Date(listing.endsAt);
-    const formattedDate = timeDate.toLocaleDateString();
-    const formattedTime = timeDate.toLocaleTimeString([], {
+    const endsAt = new Date(listing.endsAt);
+
+    const listingDate = document.createElement("p");
+    listingDate.classList.add("p-3", "fs-7", "fw-bold");
+    listingDate.textContent = `Bidding ends: ${endsAt.toLocaleDateString()}`;
+    listingDetails.appendChild(listingDate);
+
+    const listingTime = document.createElement("p");
+    listingTime.classList.add("p-3", "fs-7", "fw-bold");
+    listingTime.textContent = `At: ${endsAt.toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
-        });
-    listingEndsAt.classList.add("p-1", "fs-7", "fw-bold");
-    listingEndsAt.innerHTML = `Ends at: ${formattedDate} ${formattedTime}`;
-    listingDetails.appendChild(listingEndsAt);
+    })}`;
+    listingDetails.appendChild(listingTime);
 
-    const bidBtn = document.createElement("button");
-    bidBtn.classList.add("custom-btn");
-    bidBtn.innerHTML = `PLACE A BID`;
-    listingDetails.appendChild(bidBtn);
 
     const bidContainer = document.createElement("div");
-    bidContainer.classList.add("container", "col-4");
+    bidContainer.classList.add("container", "col-4", "my-2", "text-center");
     infoContainer.appendChild(bidContainer);
 
     const bidBox = document.createElement("div");
-    bidBox.classList.add("custom-btn", "d-flex", "flex-column", "justify-content-center", "align-items-center");
+    bidBox.classList.add("custom-btn", "d-flex", "flex-column", "justify-content-center", "align-items-center", "rounded", "mx-3", "pt-1");
     bidContainer.appendChild(bidBox);
 
     const listingBidsText = document.createElement("p");
     listingBidsText.classList.add("fs-7", "fw-bold");
-    listingBidsText.innerHTML = `Current Bids:`;
+    listingBidsText.innerHTML = `Current Bid:`;
     bidBox.appendChild(listingBidsText);
 
-    const listingNumberOfBids = document.createElement("h3");
-    listingNumberOfBids.classList.add("fs-1");
-    listingNumberOfBids.innerHTML = listing._count.bids;
-    bidBox.appendChild(listingNumberOfBids);
+    const currentBid = document.createElement("h3");
+    currentBid.classList.add("fs-1");
+    if (listing.bids.length > 0) {
+    const lastIndex = listing.bids.length - 1;
+    const amount = listing.bids[lastIndex].amount;
+    currentBid.innerHTML = `${amount}`;
+    } else {
+        currentBid.innerHTML = "0";
+    }
+    bidBox.appendChild(currentBid);
 
     const bidHistory = document.createElement("p");
+    bidHistory.classList.add("text-center", "nav-btn", "p-1");
     bidHistory.innerHTML = `Bid history (${listing._count.bids})`;
     bidContainer.appendChild(bidHistory);
 
+    bidHistory.addEventListener("click", function() {
+        const modal = new bootstrap.Modal(document.getElementById("bid-history-modal"));
+        modal.show();
+    });
 
-    //   const listingBiddingInfo = document.createElement("div");
-    //   listingBiddingInfo.classList.add("col-4");
-    //   listingDetails.appendChild(listingBiddingInfo);
+    const modalBody = document.getElementById("bid-history");
 
 
-    //   const listingDescription = document.createElement("p");
-    //   listingDescription.classList.add("card-text", "p-1", "mb-2");
-    //   listingDescription.innerHTML = listing.description || "No Description";
-    //   listingInfo.appendChild(listingDescription);
+    bidHistory.addEventListener("click", function() {
+    modalBody.innerHTML = "";
+
+    listing.bids.forEach(bid => {
+        const listItem = document.createElement("li");
+        listItem.style.listStyleType = "none";
+        listItem.classList.add("my-2");
+        listItem.innerHTML = `
+            <div class="d-flex align-items-center">
+                <img src="${bid.bidder.avatar.url}" alt="${bid.bidder.avatar.alt}" class="rounded-circle me-2" style="width: 40px; height: 40px;">
+                <div class="row" style="width: 100%;">
+                    <h6 class="m-0 col-8">${bid.bidder.name}</h6>
+                    <p class="m-0 col-4">Amount: $${bid.amount}</p>
+                </div>
+            </div>
+        `;
+
+        modalBody.appendChild(listItem);
+    });
+});
+
+
+    // const bidBtn = document.createElement("button");
+    // bidBtn.classList.add("btn","custom-btn", "m-3");
+    // bidBtn.innerHTML = `PLACE A BID`;
+    // listingDetails.appendChild(bidBtn);
+
+
+// Create a container for input and submit button
+const inputContainer = document.createElement("div");
+inputContainer.classList.add("d-flex", "align-items-center");
+
+// Create input element
+const bidInput = document.createElement("input");
+bidInput.classList.add("form-control", "m-3", "border-custom", "inputs");
+bidInput.setAttribute("type", "number");
+bidInput.setAttribute("placeholder", "Enter your bid amount");
+
+// Create submit button
+const submitBtn = document.createElement("button");
+submitBtn.classList.add("btn", "custom-btn", "m-3");
+submitBtn.setAttribute("id", "bidBtn");
+submitBtn.innerHTML = "BID";
+
+// Append input and submit button to the container
+inputContainer.appendChild(bidInput);
+inputContainer.appendChild(submitBtn);
+
+// Append the container to the listingDetails element
+listingDisplay.appendChild(inputContainer);
+
+// Add a resize event listener to handle changes in window size
+window.addEventListener('resize', function() {
+    // Get the width of the window
+    const screenWidth = window.innerWidth;
   
-    //   const listingEndsAt = document.createElement("p");
-    //   const timeDate = new Date(listing.endsAt);
-    //   const formattedDate = timeDate.toLocaleDateString();
-    //   const formattedTime = timeDate.toLocaleTimeString([], {
-    //         hour: "2-digit",
-    //         minute: "2-digit",
-    //         });
-    //   listingEndsAt.classList.add("p-1", "fs-7", "fw-bold");
-    //   listingEndsAt.innerHTML = `Bidding ends:${formattedDate} ${formattedTime}`;
-    //   listingInfo.appendChild(listingEndsAt);
-
-    //   const listingBidsText = document.createElement("p");
-    //   listingBidsText.classList.add("fs-7", "fw-bold");
-    //   listingBidsText.innerHTML = `Bids:`;
-    //   listingBiddingInfo.appendChild(listingBidsText);
-
-    //   const listingNumberOfBids = document.createElement("h3");
-    //   listingNumberOfBids.classList.add("fs-1");
-    //   listingNumberOfBids.innerHTML = listing._count.bids;
-    //   listingBiddingInfo.appendChild(listingNumberOfBids);
+    // Check if the screen width is less than 600px
+    if (screenWidth < 600) {
+      // Change the display property of infoContainer to flex-column
+      infoContainer.classList.add('flex-column');
+      listingDetails.classList.add("col-12");
+      bidContainer.classList.add('col-12');
+    } else {
+      // Change the layout for larger screens
+      infoContainer.classList.remove('flex-column');
+      listingDetails.classList.remove("col-12");
+      bidContainer.classList.remove('col-12');
+    }
+  });
 
 }
