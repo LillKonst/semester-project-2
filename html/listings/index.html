@@ -24,11 +24,12 @@
     <link rel="stylesheet" href="/dist/css/styles.css" />
     <script src="/js/logout.js" type="module" defer></script>
     <script src="/js/listing/display.js" type="module" defer></script>
+    <script src="/js/nav.js" type="module" defer></script>
   </head>
   <body>
-    <header class="d-flex p-3 mx-5">
+    <header class="d-flex p-3 mx-5 fixed-mobile">
       <img src="/images/logo.svg" alt="logo" class="logo" />
-      <ul class="nav ms-auto p-2 my-3">
+      <ul class="nav ms-auto p-2 my-3 mob-menu">
         <li class="nav-item">
           <a class="nav-btn" href="../home/index.html">HOME</a>
         </li>
@@ -39,15 +40,27 @@
           <a class="nav-btn" id="logout">LOG OUT</a>
         </li>
       </ul>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list d-none" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-list hamburger-menu fs-3 position-absolute top-0 end-0 m-4 me-5"
+        viewBox="0 0 16 16" style="width: 2em; height: 2em;"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+        />
       </svg>
     </header>
     <section>
       <div id="bid-history-modal" class="modal" tabindex="-1">
         <div class="modal-dialog">
           <div class="modal-content">
-            <div class="modal-header background-color d-flex justify-content-center align-items-center text-center">
+            <div
+              class="modal-header background-color d-flex justify-content-center align-items-center text-center"
+            >
               <h5 class="modal-title text-center color-primary">BID HISTORY</h5>
               <button
                 type="button"
@@ -61,7 +74,7 @@
         </div>
       </div>
     </section>
-    <main class="mx-md-5">
+    <main class="mx-md-5 top-padding">
       <div class="d-flex justify-content-center align-items-center">
         <div id="listing-container" class="col-lg-8 col-md-10 col-sm-12"></div>
       </div>

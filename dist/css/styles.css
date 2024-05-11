@@ -34,6 +34,12 @@ body {
 .logo {
   width: 140px;
 }
+@media (max-width: 750px) {
+  .logo {
+    width: 120px;
+    padding-left: 20px;
+  }
+}
 
 .searchbar {
   font-family: "assistant";
@@ -125,19 +131,36 @@ a {
   color: #0D0630;
 }
 
-.hamburger-menu {
-  display: none;
+.mob-menu {
+  background-color: #DACAAA;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  top: 55px;
+  right: 0;
+  width: 300px;
+  height: 400px;
+  z-index: 999;
+  border-radius: 5px 0px 0px 5px;
 }
-@media (max-width: 600px) {
-  .hamburger-menu {
-    display: block;
-  }
+.mob-menu li {
+  padding: 20px;
+  font-size: 1.2em;
 }
 
-@media (max-width: 600px) {
-  header ul {
-    display: none;
-  }
+.fixed-mobile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #FFFBF6;
+}
+
+.top-padding {
+  padding-top: 80px;
 }
 
 /*# sourceMappingURL=styles.css.map */
