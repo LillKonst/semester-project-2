@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const hamburgerMenu = document.querySelector(".hamburger-menu");
     const navMenu = document.querySelector(".nav");
     const header = document.querySelector("header");
+    const navUl = document.querySelector(".mob-menu");
 
     hamburgerMenu.addEventListener("click", function() {
         navMenu.classList.toggle("d-none"); // Toggle visibility of navMenu
@@ -24,8 +25,11 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             hamburgerMenu.classList.add("d-none");
             navMenu.classList.remove("d-none");
-            navMenu.classList.remove("bg-light"); // Remove Bootstrap bg-light class when screen is wider
-            navMenu.classList.remove("flex-column"); // Remove Bootstrap flex-column class when screen is wider
+            navMenu.classList.remove("bg-light"); 
+            navMenu.classList.remove("flex-column"); 
+            navUl.classList.remove("mob-menu");
+            header.classList.remove("fixed-mobile");
+            header.classList.add("mx-5");
         }
     }
 });

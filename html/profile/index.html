@@ -25,11 +25,12 @@
     <script src="/js/logout.js" type="module" defer></script>
     <script src="/js/profile.js" type="module" defer></script>
     <script src="/js/update-avatar.js" type="module" defer></script>
+    <script src="/js/nav.js" type="module" defer></script>
   </head>
   <body>
-    <header class="d-flex p-3 mx-5">
-      <img src="/images/logo.svg" alt="logo" class="logo" />
-      <ul class="nav ms-auto p-2 my-3">
+    <header class="d-flex p-3 mx-5 fixed-mobile">
+      <a href="/index.html"> <img src="/images/logo.svg" alt="logo" class="logo" /> </a>
+      <ul class="nav ms-auto p-2 my-3 mob-menu">
         <li class="nav-item">
           <a class="nav-btn" href="../home/index.html">HOME</a>
         </li>
@@ -40,6 +41,19 @@
           <a class="nav-btn" id="logout">LOG OUT</a>
         </li>
       </ul>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-list hamburger-menu fs-3 position-absolute top-0 end-0 m-4 me-5"
+        viewBox="0 0 16 16" style="width: 2em; height: 2em;"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+        />
+      </svg>
     </header>
     <div
       class="modal"

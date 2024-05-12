@@ -25,6 +25,7 @@ async function displayListings() {
    
 
         allListingsContainer.innerHTML = "";
+        allListingsContainer.classList.add("d-flex", "justify-content-center", "align-items-center", "text-center");
 
         listings.forEach(listing => {
             const listingCard = document.createElement("div");
@@ -130,3 +131,22 @@ listingText.appendChild(listingTime);
         console.error(error);
     }
 }
+
+let listingUl; 
+
+document.addEventListener("DOMContentLoaded", function() {
+    listingUl = document.getElementById("listing-ul");
+});
+
+window.addEventListener("resize", checkScreenSize);
+
+function checkScreenSize() {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth <= 620) {
+        if (listingUl) {
+            listingUl.classList.remove("ms-auto");
+        }
+    }
+}
+

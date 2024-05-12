@@ -46,6 +46,7 @@ body {
   color: #DACAAA;
   background-color: #FFFBF6;
   border-color: #DACAAA;
+  width: 250px;
 }
 
 .custom-btn {
@@ -161,6 +162,26 @@ a {
 
 .top-padding {
   padding-top: 80px;
+}
+
+#listings-top {
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 950px) {
+  #listings-top {
+    flex-wrap: wrap;
+  }
+  #listings-top ul {
+    order: 3;
+  }
+}
+@media (max-width: 620px) {
+  #listings-top {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
