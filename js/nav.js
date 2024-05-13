@@ -22,11 +22,10 @@ document.addEventListener("DOMContentLoaded", function() {
             hamburgerMenu.classList.remove("d-none");
             navMenu.classList.add("d-none");
             header.classList.remove("mx-5");
+            navUl.classList.add("mob-menu");
         } else {
             hamburgerMenu.classList.add("d-none");
             navMenu.classList.remove("d-none");
-            navMenu.classList.remove("bg-light"); 
-            navMenu.classList.remove("flex-column"); 
             navUl.classList.remove("mob-menu");
             header.classList.remove("fixed-mobile");
             header.classList.add("mx-5");

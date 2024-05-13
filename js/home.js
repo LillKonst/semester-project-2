@@ -29,7 +29,7 @@ async function displayListings() {
 
         listings.forEach(listing => {
             const listingCard = document.createElement("div");
-            listingCard.classList.add("col-md-4", "col-sm-10", "p-2", "card-custom")
+            listingCard.classList.add("col-xl-4", "col-md-6", "col-sm-10", "p-2", "card-custom", "min-width-250");
             listingCard.addEventListener("click", () => {
                 window.location.href = `../listings/index.html?id=${listing.id}&title=${listing.title}`;
             });
@@ -62,7 +62,7 @@ async function displayListings() {
             cardInner.appendChild(listingInfo);
 
             const listingText = document.createElement("div");
-            listingText.classList.add("col-9");
+            listingText.classList.add("col-9", "d-flex", "flex-column", "justify-content-start", "align-items-start");
             listingInfo.appendChild(listingText);
 
             const listingTitle = document.createElement("h2");

@@ -1,3 +1,19 @@
+.primary {
+  color: #0D0630;
+}
+
+.secondary {
+  color: #DACAAA;
+}
+
+.tertiary {
+  color: #FFFBF6;
+}
+
+.quaternary {
+  color: #544B3D;
+}
+
 @font-face {
   font-family: "assistant";
   src: url(../../fonts/Assistant-VariableFont_wght.ttf);
@@ -174,6 +190,7 @@ a {
   }
   #listings-top ul {
     order: 3;
+    margin: auto;
   }
 }
 @media (max-width: 620px) {
@@ -181,6 +198,11 @@ a {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+}
+@media (max-width: 374px) {
+  #listings-top ul a {
+    padding: 5px;
   }
 }
 

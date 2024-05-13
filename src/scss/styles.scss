@@ -3,6 +3,23 @@ $secondary: #DACAAA;
 $tertiary: #FFFBF6;
 $quaternary :#544B3D;
 
+.primary {
+    color: $primary;
+}
+
+.secondary {
+    color: $secondary;
+}
+
+.tertiary {
+    color: $tertiary;
+}
+
+.quaternary {
+    color: $quaternary;
+}
+
+
 @font-face {
     font-family: "assistant";
     src: url(../../fonts/Assistant-VariableFont_wght.ttf);
@@ -195,6 +212,7 @@ a {
 
         ul {
             order: 3; 
+            margin: auto;
         }
     }
 
@@ -203,6 +221,12 @@ a {
         justify-content: center;
         align-items: center;
 
+    }
+
+    @media (max-width: 374px) {
+        ul a {
+            padding: 5px;
+        }
     }
 }
 

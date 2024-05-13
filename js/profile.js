@@ -1,4 +1,4 @@
-import { fetchProfile, fetchListingsByUser } from "./modules/api.js";
+import { fetchProfile, fetchListingsByUser, fetchListingsByBids } from "./modules/api.js";
 import { MAX_TEXT_LENGTH } from "../js/home.js";
 
 export { displayUserProfile };
@@ -32,23 +32,34 @@ async function displayUserProfile() {
             console.log("Displayed default avatar.");
         }
         
-
-        await displayListingsByUser(username);
+        await displayListingsByUser(username, false);
 
     } catch (error) {
         console.error("Error fetching and displaying user profile:", error);
     }
 }
 
-async function displayListingsByUser(username) {
+async function displayListingsByUser(username, isBids) {
     try {
-        const listingsByUser = await fetchListingsByUser(username);
+        let listings;
+        
+        if (isBids) {
+            listings = await fetchListingsByBids(username);
+        } else {
+            listings = await fetchListingsByUser(username);
+        }
+
+        console.log("Listings:", listings);
+
+        const listingsData = listings.data;
+
+        //const listingsByUser = await fetchListingsByUser(username);
         const listingsContainer = document.getElementById("listings-container");
         listingsContainer.innerHTML = "";
 
-        listingsByUser.forEach(listing => {
+        listingsData.forEach(listing => {
                 const listingCard = document.createElement("div");
-                listingCard.classList.add("col-md-4", "col-sm-10", "p-2", "card-custom")
+                listingCard.classList.add("col-xl-4", "col-md-6", "col-sm-10", "p-2", "card-custom", "min-width-250");
                 listingCard.addEventListener("click", () => {
                     window.location.href = `../listings/index.html?id=${listing.id}&title=${listing.title}`;
                 });
@@ -70,7 +81,7 @@ async function displayListingsByUser(username) {
                 cardInner.appendChild(listingInfo);
     
                 const listingText = document.createElement("div");
-                listingText.classList.add("col-9");
+                listingText.classList.add("col-9", "d-flex", "flex-column", "justify-content-start", "align-items-start");
                 listingInfo.appendChild(listingText);
     
                 const listingTitle = document.createElement("h2");
@@ -91,7 +102,7 @@ async function displayListingsByUser(username) {
                 listingDescription.innerHTML = truncatedText || "No Description";
                 listingText.appendChild(listingDescription);
     
-                               // Assuming the 'endsAt' field is available in the 'listing' object
+
 const endsAt = new Date(listing.endsAt);
 
 // Create a paragraph element for the date
@@ -134,195 +145,43 @@ document.addEventListener("DOMContentLoaded", () => {
     displayUserProfile();
 });
 
+document.getElementById("ive-bid-on").addEventListener("click", async () => {
+    console.log("I've bid on clicked!");
+    try {
+        const loggedInUser = JSON.parse(localStorage.getItem("profile"));
+        const username = loggedInUser.name;
+        await displayListingsByUser(username, true); // Pass true to indicate displaying listings the user has bid on
+    } catch (error) {
+        console.error("Error displaying listings by user:", error);
+    }
+});
 
 
 
 
+// Get references to the h2 elements
+const myListingHeading = document.getElementById("my-listings");
+const iveBidOnHeading = document.getElementById("ive-bid-on");
 
+// Add click event listeners to the h2 elements
+myListingHeading.addEventListener("click", () => setActiveTab(myListingHeading, iveBidOnHeading));
+iveBidOnHeading.addEventListener("click", () => setActiveTab(iveBidOnHeading, myListingHeading));
 
-
-
-
-
-
-// // import { fetchProfile } from "./modules/api.js";
-// // import { fetchListingsByUser } from "./modules/api.js";
-// // import { displayListings } from "./home.js";
-
-
-// // async function displayListingsByUser(fetchListingsByUser, username) {
-// //     try {
-// //       const listingsContainer = document.getElementById("listings-container");
-// //       listingsContainer.innerHTML = "";
+// Function to toggle active tab
+function setActiveTab(activeHeading, inactiveHeading) {
+  // Remove active class from all h2 elements
+  document.querySelectorAll("h2").forEach((heading) => {
+    heading.classList.remove("active");
+  });
   
-// //       userPosts.forEach((listing) => {
-// //         const listingCard = createListingCard(listing, username);
-// //         listingsContainer.appendChild(listingCard);
-// //       });
-// //     } catch (error) {
-// //       console.error("Error displaying user posts:", error);
-// //     }
-// //   }
-
-
-// // async function displayUserProfile() {
-// //     try {
-// //       console.log("Fetching user's profile...");
-// //       // Retrieve the user's profile
-// //       const loggedInUser = JSON.parse(localStorage.getItem("profile"));
-// //       const username = loggedInUser.name;
-// //       console.log("Username:", username);
-
-// //       console.log("Fetching profile data for user:", username);
-// //       const userProfile = await fetchProfile(username);
-// //       console.log("User profile:", userProfile);
+  // Add active class to the clicked h2 element
+  activeHeading.classList.add("active");
   
-// //       // Display user's username
-// //       const userName = document.getElementById("userName");
-// //       userName.textContent = username;
-// //       console.log("Displaying username:", username);
+  // Remove secondary class from all h2 elements inside the specific div
+  activeHeading.parentElement.querySelectorAll("h2").forEach((heading) => {
+    heading.classList.remove("secondary");
+  });
   
-// //       // Display user's avatar if available
-// //       const profileImage = document.getElementById("profileImage");
-// //       if (userProfile.avatar && userProfile.avatar.url) {
-// //         profileImage.src = userProfile.avatar.url;
-// //         profileImage.alt = userProfile.avatar.alt;
-// //         console.log("Displayed user's avatar.");
-// //       } else {
-// //         // Set a default image if avatar is not available
-// //         profileImage.src = "/images/kompis.JPG";
-// //         profileImage.alt = "Default Avatar";
-// //         console.log("Displayed default avatar.");
-// //       }
-
-
-// //         // Retrieve and display user's posts
-// //         const listingsByUser = await fetchListingsByUser(username);
-// //         displayListingsByUser(listingsByUser, username);
-  
-// //     } catch (error) {
-// //       console.error("Error fetching and displaying user profile:", error);
-// //     }
-// //   }
-  
-// //   // Call the function to display user profile after the DOM is fully loaded
-// //   document.addEventListener("DOMContentLoaded", () => {
-// //     console.log("DOM fully loaded. Displaying user profile...");
-// //     displayUserProfile();
-// //   });
-
-  
-// import { fetchProfile } from "./modules/api.js";
-// import { fetchListingsByUser } from "./modules/api.js";
-// // import { fetchProfile } from "./modules/api.js";
-// import { fetchListingsByUser } from "./modules/api.js";
-// //import { displayListings } from "./home.js";
-
-// // async function displayListingsByUser(fetchListingsFunction, username) {
-// //     try {
-// //         const listingsByUser = await fetchListingsFunction(username);
-// //         const listingsContainer = document.getElementById("listings-container");
-// //         listingsContainer.innerHTML = "";
-
-// //         // Assuming each listing in listingsByUser is an object
-// //         listingsByUser.forEach((listing) => {
-// //             const listingCard = createListingCard(listing, username);
-// //             listingsContainer.appendChild(listingCard);
-// //         });
-// //     } catch (error) {
-// //         console.error("Error displaying listings by user:", error);
-// //     }
-// // }
-
-// async function displayUserProfile() {
-//     try {
-//         console.log("Fetching user's profile...");
-//         const loggedInUser = JSON.parse(localStorage.getItem("profile"));
-//         const username = loggedInUser.name;
-//         console.log("Username:", username);
-
-//         console.log("Fetching profile data for user:", username);
-//         const userProfile = await fetchProfile(username);
-//         console.log("User profile:", userProfile);
-
-//         const userName = document.getElementById("userName");
-//         userName.textContent = username;
-//         console.log("Displaying username:", username);
-
-//         const profileImage = document.getElementById("profileImage");
-//         if (userProfile.avatar && userProfile.avatar.url) {
-//             profileImage.src = userProfile.avatar.url;
-//             profileImage.alt = userProfile.avatar.alt;
-//             console.log("Displayed user's avatar.");
-//         } else {
-//             profileImage.src = "/images/kompis.JPG";
-//             profileImage.alt = "Default Avatar";
-//             console.log("Displayed default avatar.");
-//         }
-
-//         await displayListingsByUser(fetchListingsByUser, username);
-
-//     } catch (error) {
-//         console.error("Error fetching and displaying user profile:", error);
-//     }
-// }
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     console.log("DOM fully loaded. Displaying user profile...");
-//     displayUserProfile();
-// });
-// // import { displayListings } from "./home.js";
-
-// async function displayListingsByUser(fetchListingsFunction, username) {
-//     try {
-//         const listingsByUser = await fetchListingsFunction(username);
-//         const listingsContainer = document.getElementById("listings-container");
-//         listingsContainer.innerHTML = "";
-
-//         // Assuming each listing in listingsByUser is an object
-//         listingsByUser.forEach((listing) => {
-//             const listingCard = createListingCard(listing, username);
-//             listingsContainer.appendChild(listingCard);
-//         });
-//     } catch (error) {
-//         console.error("Error displaying listings by user:", error);
-//     }
-// }
-
-// async function displayUserProfile() {
-//     try {
-//         console.log("Fetching user's profile...");
-//         const loggedInUser = JSON.parse(localStorage.getItem("profile"));
-//         const username = loggedInUser.name;
-//         console.log("Username:", username);
-
-//         console.log("Fetching profile data for user:", username);
-//         const userProfile = await fetchProfile(username);
-//         console.log("User profile:", userProfile);
-
-//         const userName = document.getElementById("userName");
-//         userName.textContent = username;
-//         console.log("Displaying username:", username);
-
-//         const profileImage = document.getElementById("profileImage");
-//         if (userProfile.avatar && userProfile.avatar.url) {
-//             profileImage.src = userProfile.avatar.url;
-//             profileImage.alt = userProfile.avatar.alt;
-//             console.log("Displayed user's avatar.");
-//         } else {
-//             profileImage.src = "/images/kompis.JPG";
-//             profileImage.alt = "Default Avatar";
-//             console.log("Displayed default avatar.");
-//         }
-
-//         await displayListingsByUser(fetchListingsByUser, username);
-
-//     } catch (error) {
-//         console.error("Error fetching and displaying user profile:", error);
-//     }
-// }
-
-// document.addEventListener("DOMContentLoaded", () => {
-//     console.log("DOM fully loaded. Displaying user profile...");
-//     displayUserProfile();
-// });
+  // Add secondary class to the inactive h2 inside the specific div
+  inactiveHeading.classList.add("secondary");
+}

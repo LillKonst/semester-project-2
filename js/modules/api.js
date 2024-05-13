@@ -7,6 +7,7 @@ export { createListing };
 export { updateAvatar };
 export { getListingSpecific };
 export { listingBid };
+export { fetchListingsByBids };
 
 //export { API_URL }; 
 
@@ -167,4 +168,28 @@ async function listingBid(listingId) {
   }
 
   return await response.json();
+}
+
+async function fetchListingsByBids (username) {
+   
+
+  const response = await fetch(
+    `${API_URL}/auction/profiles/${username}/bids`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+        "X-Noroff-API-Key": APIKey,
+      },
+    }
+  );
+
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw new Error(`Could not post comment: ${errorData.message}`);
+  }
+
+  return await response.json();
+
 }
