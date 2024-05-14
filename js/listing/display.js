@@ -179,12 +179,12 @@ async function displayListing(listing) {
     const endsAt = new Date(listing.endsAt);
 
     const listingDate = document.createElement("p");
-    listingDate.classList.add("p-3", "fs-7", "fw-bold");
+    listingDate.classList.add("px-3", "fs-7", "fw-bold");
     listingDate.textContent = `Bidding ends: ${endsAt.toLocaleDateString()}`;
     listingDetails.appendChild(listingDate);
 
     const listingTime = document.createElement("p");
-    listingTime.classList.add("p-3", "fs-7", "fw-bold");
+    listingTime.classList.add("px-3", "fs-7", "fw-bold");
     listingTime.textContent = `At: ${endsAt.toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
@@ -266,15 +266,14 @@ const bidInput = document.createElement("input");
 bidInput.classList.add("form-control", "m-3", "border-custom", "inputs");
 bidInput.setAttribute("type", "number");
 bidInput.setAttribute("placeholder", "Enter your bid amount");
+bidInput.setAttribute("id", "bidInput");
+inputContainer.appendChild(bidInput);
 
 // Create submit button
 const submitBtn = document.createElement("button");
 submitBtn.classList.add("btn", "custom-btn", "m-3");
 submitBtn.setAttribute("id", "bidBtn");
 submitBtn.innerHTML = "BID";
-
-// Append input and submit button to the container
-inputContainer.appendChild(bidInput);
 inputContainer.appendChild(submitBtn);
 
 // Append the container to the listingDetails element
@@ -297,6 +296,9 @@ window.addEventListener('resize', function() {
       listingDetails.classList.remove("col-12");
       bidContainer.classList.remove('col-12');
     }
+
   });
 
+  const elementsReadyEvent = new Event("elementsReady");
+    document.dispatchEvent(elementsReadyEvent);
 }

@@ -126,7 +126,7 @@ async function updateAvatar(username, newProfileImgUrl) {
   }
 }
 
-// Get post specific
+// Get listing specific
 async function getListingSpecific(listingId) {
   const response = await fetch(
     `${API_URL}/auction/listings/${listingId}?_seller=true&_bids=true`,
@@ -146,11 +146,11 @@ async function getListingSpecific(listingId) {
 }
 
 // Make a bid
-async function listingBid(listingId) {
+async function listingBid(listingId, bidData) {
  
 
   const response = await fetch(
-    `${API_URL}/auction/listings/${listingId}/_bids`,
+    `${API_URL}/auction/listings/${listingId}/bids`,
     {
       method: "POST",
       headers: {
@@ -164,7 +164,7 @@ async function listingBid(listingId) {
 
   if (!response.ok) {
     const errorData = await response.json();
-    throw new Error(`Could not post comment: ${errorData.message}`);
+    throw new Error(`Could not post bid: ${errorData.message}`);
   }
 
   return await response.json();

@@ -206,4 +206,9 @@ a {
   }
 }
 
+.custom-thumbnail {
+  height: 100px;
+  width: 100px;
+}
+
 /*# sourceMappingURL=styles.css.map */

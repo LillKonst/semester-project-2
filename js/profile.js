@@ -57,7 +57,7 @@ async function displayListingsByUser(username, isBids) {
         const listingsContainer = document.getElementById("listings-container");
         listingsContainer.innerHTML = "";
 
-        listingsData.forEach(listing => {
+        listings.forEach(listing => {
                 const listingCard = document.createElement("div");
                 listingCard.classList.add("col-xl-4", "col-md-6", "col-sm-10", "p-2", "card-custom", "min-width-250");
                 listingCard.addEventListener("click", () => {
