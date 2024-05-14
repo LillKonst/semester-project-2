@@ -1,3 +1,19 @@
+.primary {
+  color: #0D0630;
+}
+
+.secondary {
+  color: #DACAAA;
+}
+
+.tertiary {
+  color: #FFFBF6;
+}
+
+.quaternary {
+  color: #544B3D;
+}
+
 @font-face {
   font-family: "assistant";
   src: url(../../fonts/Assistant-VariableFont_wght.ttf);
@@ -34,12 +50,19 @@ body {
 .logo {
   width: 140px;
 }
+@media (max-width: 750px) {
+  .logo {
+    width: 120px;
+    padding-left: 20px;
+  }
+}
 
 .searchbar {
   font-family: "assistant";
   color: #DACAAA;
   background-color: #FFFBF6;
   border-color: #DACAAA;
+  width: 250px;
 }
 
 .custom-btn {
@@ -66,6 +89,126 @@ body {
   border-bottom-right-radius: 0px;
   height: 200px;
   object-fit: cover;
+}
+
+.inputs {
+  background-color: #FFFBF6;
+}
+
+.profile-img-container {
+  width: 100px;
+  height: 100px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.background-color {
+  background-color: #FFFBF6;
+}
+
+.login-btn {
+  color: #0D0630;
+  text-decoration: none;
+}
+.login-btn:hover {
+  color: #0D0630;
+  text-decoration: underline;
+}
+
+.custom-line {
+  color: #DACAAA;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.custom-profile-img {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  padding: 0px;
+  margin: 10px;
+}
+
+.listing-img {
+  height: 450px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.border-bottom {
+  border-color: #DACAAA !important;
+}
+
+.color-primary {
+  color: #0D0630;
+}
+
+.mob-menu {
+  background-color: #DACAAA;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: absolute;
+  top: 55px;
+  right: 0;
+  width: 300px;
+  height: 400px;
+  z-index: 999;
+  border-radius: 5px 0px 0px 5px;
+}
+.mob-menu li {
+  padding: 20px;
+  font-size: 1.2em;
+}
+
+.fixed-mobile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #FFFBF6;
+}
+
+.top-padding {
+  padding-top: 80px;
+}
+
+#listings-top {
+  display: flex;
+  justify-content: space-between;
+}
+@media (max-width: 950px) {
+  #listings-top {
+    flex-wrap: wrap;
+  }
+  #listings-top ul {
+    order: 3;
+    margin: auto;
+  }
+}
+@media (max-width: 620px) {
+  #listings-top {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (max-width: 374px) {
+  #listings-top ul a {
+    padding: 5px;
+  }
+}
+
+.custom-thumbnail {
+  height: 100px;
+  width: 100px;
 }
 
 /*# sourceMappingURL=styles.css.map */
