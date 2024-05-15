@@ -1,40 +1,152 @@
+// import { listingBid, getListingSpecific } from "../modules/api.js";
+
+// document.addEventListener("elementsReady", async () => {
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const listingId = urlParams.get('id');
+
+//     const bidBtn = document.getElementById("bidBtn");
+//     const bidInput = document.getElementById("bidInput");
+
+//     bidBtn.addEventListener("click", async () => {
+//       try {
+//         const bidAmount = parseFloat(bidInput.value);
+
+//         const listingData = await getListingSpecific(listingId);
+
+//         const currentBidAmount = listingData._count.bids;
+
+//         if (bidAmount <= currentBidAmount + 1) {
+//           throw new Error('Bid amount must be at least 1 credit bigger than the current bid');
+//         }
+
+//         const bidData = { amount: bidAmount };
+
+//         const response = await listingBid(listingId, bidData);
+//         console.log(response);
+
+//         if (!response.ok) {
+//           throw new Error('Failed to place bid');
+//         }
+
+//         const data = await response.json();
+//         console.log('Bid placed successfully', data);
+//       } catch (error) {
+//         console.error('Error placing bid:', error);
+//       }
+//     });
+// });
+
+// version 2
+
+// import { listingBid, getListingSpecific } from "../modules/api.js";
+
+// document.addEventListener("elementsReady", async () => {
+//     const urlParams = new URLSearchParams(window.location.search);
+//     const listingId = urlParams.get('id');
+
+//     const bidBtn = document.getElementById("bidBtn");
+//     const bidInput = document.getElementById("bidInput");
+//     const bidError = document.getElementById("bidError");
+
+//     bidBtn.addEventListener("click", async () => {
+//       try {
+//         const bidAmount = parseFloat(bidInput.value);
+
+//         const listingData = await getListingSpecific(listingId);
+
+//         const currentBidAmount = listingData._count.bids;
+
+//         if (bidAmount <= currentBidAmount + 1) {
+//           bidError.textContent = 'Bid amount must be at least 1 credit bigger than the current bid';
+//           bidError.style.color = 'red';
+//           return;
+//         }
+
+//         const bidData = { amount: bidAmount };
+
+//         const response = await listingBid(listingId, bidData);
+
+//         if (!response.ok) {
+//           throw new Error('Failed to place bid');
+//         }
+
+//         // Refresh the page after successful bid placement
+//         window.location.reload();
+//       } catch (error) {
+//         console.error('Error placing bid:', error);
+//         bidError.textContent = 'Failed to place bid, please try again';
+//         bidError.style.color = 'red';
+//       }
+//     });
+// });
+
+
+// version 3
+
 import { listingBid, getListingSpecific } from "../modules/api.js";
 
 document.addEventListener("elementsReady", async () => {
-  try {
     const urlParams = new URLSearchParams(window.location.search);
     const listingId = urlParams.get('id');
 
     const bidBtn = document.getElementById("bidBtn");
     const bidInput = document.getElementById("bidInput");
+    const bidError = document.getElementById("bidError");
 
-    bidBtn.addEventListener("click", async () => {
-      try {
-        const bidAmount = parseFloat(bidInput.value);
+    bidBtn.addEventListener("click", handleBid);
 
+    async function handleBid() {
+        try {
+            const bidAmount = getBidAmount();
+            console.log('Bid amount:', bidAmount);
+
+            const currentBidAmount = await getCurrentBidAmount();
+            console.log('Current bid amount:', currentBidAmount);
+
+            console.log('Validating bid amount...');
+            validateBidAmount(bidAmount, currentBidAmount);
+
+            await placeBid(bidAmount);
+            console.log('Bid placed successfully');
+
+            console.log('Reloading page...');
+            window.location.reload();
+        } catch (error) {
+            handleError(error);
+        }
+    }
+
+    function getBidAmount() {
+        const amount = parseFloat(bidInput.value);
+        if (isNaN(amount)) {
+            throw new Error('Bid amount must be a valid number');
+        }
+        return amount;
+    }
+
+    async function getCurrentBidAmount() {
         const listingData = await getListingSpecific(listingId);
+        return listingData._count.bids;
+    }
 
-        const currentBidAmount = listingData._count.bids;
-
+    function validateBidAmount(bidAmount, currentBidAmount) {
         if (bidAmount <= currentBidAmount + 1) {
-          throw new Error('Bid amount must be at least 1 credit bigger than the current bid');
+            throw new Error('Bid amount must be at least 1 credit bigger than the current bid');
         }
+    }
 
+    async function placeBid(bidAmount) {
         const bidData = { amount: bidAmount };
-
         const response = await listingBid(listingId, bidData);
-
+        console.log('Bid response:', response);
         if (!response.ok) {
-          throw new Error('Failed to place bid');
+            throw new Error('Failed to place bid');
         }
+    }
 
-        const data = await response.json();
-        console.log('Bid placed successfully', data);
-      } catch (error) {
+    function handleError(error) {
         console.error('Error placing bid:', error);
-      }
-    });
-  } catch (error) {
-    console.error('Error initializing bid functionality:', error.message);
-  }
+        bidError.textContent = 'Failed to place bid, please try again';
+        bidError.style.color = 'red';
+    }
 });
