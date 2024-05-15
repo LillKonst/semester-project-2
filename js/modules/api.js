@@ -8,6 +8,8 @@ export { updateAvatar };
 export { getListingSpecific };
 export { listingBid };
 export { fetchListingsByBids };
+export { getListingsSearch };
+export { sortListings };
 
 //export { API_URL }; 
 
@@ -192,4 +194,62 @@ async function fetchListingsByBids (username) {
 
   return await response.json();
 
+}
+
+// Search listings
+async function getListingsSearch(query) {
+  const response = await fetch(
+    `${API_URL}/auction/listings/search?q=${query}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+        "X-Noroff-API-Key": APIKey,
+      },
+    }
+  );
+  if (!response.ok) {
+    throw new Error("Could not load listings");
+  }
+  const result = await response.json();
+  return result.data;
+}
+
+// Filter listings
+async function sortListings(tag = "", active = false) {
+  let apiUrl = `${API_URL}/auction/listings`;
+
+  // Check if any filtering options are provided
+  if (tag || active) {
+      apiUrl += "?";
+  }
+
+  // Add tag filter if provided
+  if (tag) {
+      apiUrl += `_tag=${tag}`;
+  }
+
+  // Add active filter if provided
+  if (active) {
+      // Add '&' if tag filter is also present
+      if (tag) {
+          apiUrl += "&";
+      }
+      apiUrl += "_active=true";
+  }
+
+  const response = await fetch(apiUrl, {
+      headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+          "X-Noroff-API-Key": APIKey,
+      },
+  });
+
+  if (!response.ok) {
+      throw new Error("Could not load listings");
+  }
+
+  const result = await response.json();
+  return result.data;
 }

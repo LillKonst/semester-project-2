@@ -1,4 +1,6 @@
 import { getAllListings } from "./modules/api.js";
+import { getListingsSearch } from "./modules/api.js";
+import { sortListings } from "./modules/api.js";
 
 export { displayListings };
 
@@ -150,3 +152,33 @@ function checkScreenSize() {
     }
 }
 
+
+// Filters and search
+document.getElementById("popular").addEventListener("click", () => {
+    sortListings(true).then((listings) => {
+        displayListings(listings);
+    });
+});
+
+document.getElementById("newest").addEventListener("click", () => {
+    sortListings(false, true).then((listings) => {
+        displayListings(listings);
+    });
+});
+
+document.getElementById("oldest").addEventListener("click", () => {
+    sortListings(false, false, true).then((listings) => {
+        displayListings(listings);
+    });
+});
+
+// Event listener for search input
+document.getElementById("searchInput").addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        const searchTerm = event.target.value;
+        getListingsSearch(searchTerm).then((listings) => {
+            displayListings(listings);
+        });
+    }
+});
