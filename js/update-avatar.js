@@ -1,10 +1,19 @@
-import { updateAvatar } from "../js/modules/api.js";
+import { updateAvatar, fetchProfile } from "../js/modules/api.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const updateBtn = document.getElementById("updateProfile");
 
   updateBtn.addEventListener("click", async () => {
     try {
+
+      const profile = await fetchProfile (username);
+      displayProfile(profile);
+
+      const oldImageUrl = document.getElementById("updateInput1");
+      if (profile.avatar && profile.avatar.url) {
+        oldImageUrl.value = profile.avatar.url;
+      }
+
       const newImageUrl = document.getElementById("updateInput1").value;
       const loggedInUser = JSON.parse(localStorage.getItem("profile"));
       
