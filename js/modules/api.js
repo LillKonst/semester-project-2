@@ -14,7 +14,7 @@ export { filterListings };
 
 //export { API_URL }; 
 
-export const API_URL = "https://v2.api.noroff.dev";
+const API_URL = "https://v2.api.noroff.dev";
 
 
 // Get all listings
@@ -237,13 +237,13 @@ async function filterListings(tag = "", active = false, popular = false, newest 
   }
 
   // Construct sorting parameters
-  let order = "asc"; // Default order
+  let order = "desc"; // Default order
   if (popular) {
-    order = "desc";
+    apiUrl += `&order=bids_count.desc`;
   } else if (newest) {
-    order = "desc";
+    apiUrl += `&order=created.desc`;
   } else if (lastChance) {
-    order = "asc"; // Assuming last chance means ending soonest
+    apiUrl += `&order=endsAt.asc`;  
   }
 
   // Add sorting parameters to the URL
