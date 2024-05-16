@@ -14,7 +14,7 @@ export { filterListings };
 
 //export { API_URL }; 
 
-export const API_URL = "https://v2.api.noroff.dev";
+const API_URL = "https://v2.api.noroff.dev";
 
 
 // Get all listings
@@ -219,7 +219,13 @@ async function getListingsSearch(searchTerm) {
 }
 
 // Filters
-async function filterListings(tag = "", active = false, popular = false, newest = false, lastChance = false) {
+async function filterListings(
+  tag = "",
+  active = false,
+  popular = false,
+  newest = false,
+  lastChance = false
+) {
   let apiUrl = `${API_URL}/auction/listings`;
 
   // Construct filter parameters
@@ -230,24 +236,23 @@ async function filterListings(tag = "", active = false, popular = false, newest 
   if (active) {
     filterParams.push("_active=true");
   }
-  
+
+  // Construct sorting parameters
+  if (popular) {
+    filterParams.push("sort=title&sortOrder=desc");
+  } else if (newest) {
+    filterParams.push("sort=created&sortOrder=desc");
+  } else if (lastChance) {
+    filterParams.push("sort=endsAt&sortOrder=asc");
+  }
+
   // Add filter parameters to the URL
   if (filterParams.length > 0) {
     apiUrl += `?${filterParams.join("&")}`;
   }
 
-  // Construct sorting parameters
-  let order = "asc"; // Default order
-  if (popular) {
-    order = "desc";
-  } else if (newest) {
-    order = "desc";
-  } else if (lastChance) {
-    order = "asc"; // Assuming last chance means ending soonest
-  }
-
   // Add sorting parameters to the URL
-  apiUrl += `&per_page=${listingsPerPage}&order=${order}`;
+  apiUrl += `&limit=${listingsPerPage}`;
 
   const response = await fetch(apiUrl, {
     headers: {
@@ -258,9 +263,18 @@ async function filterListings(tag = "", active = false, popular = false, newest 
   });
 
   if (!response.ok) {
+    console.log(response);
     throw new Error("Could not fetch listings");
   }
 
   const result = await response.json();
-  return result.data;
+
+  let returnedListings = result.data;
+  if (popular) {
+    const returnedListings = result.data.sort((a, b) => {
+      return new Date(b._count.bids) - new Date(a._count.bids);
+    });
+  }
+
+  return returnedListings;
 }

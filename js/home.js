@@ -281,9 +281,11 @@ function showError(message){
     }
 }
 
-async function displayListings() {
-  try {
-    const listings = await getAllListings(currentPage);
+async function displayListings(listings = null) {
+    try {
+      if (!listings) {
+        listings = await getAllListings(currentPage);
+      }
 
     const allListingsContainer = document.getElementById("listings-container");
     if (!allListingsContainer) {
@@ -419,7 +421,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Filters and search
 document.getElementById("popular").addEventListener("click", async () => {
     try {
-        const listings = await filterListings(true);
+        const listings = await filterListings("", false, true);
         displayListings(listings);
     } catch (error) {
         console.error(error);

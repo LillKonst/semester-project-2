@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Biddings</title>
     <link
       rel="stylesheet"
       href="../../node_modules/bootstrap/dist/css/bootstrap.min.css"
@@ -183,22 +183,22 @@
     </div>
 
     <main>
-      <div class="mx-5 px-3">
-        <div class="d-flex p-2">
-          <h1 class="">LISTINGS</h1>
-          <ul class="nav ms-auto p-2">
+      <div class="mx-md-5 mx-sm-1 px-3">
+        <div id="listings-top" class="d-flex p-2">
+          <h1 class="mb-3 mb-lg-0">LISTINGS</h1>
+          <ul id="listing-ul" class="nav ms-auto p-2">
             <li class="nav-item">
-              <a class="nav-btn" href="home.html">POPULAR</a>
+              <a class="nav-btn filter-btn" id="popular">POPULAR</a>
             </li>
             <li class="nav-item">
-              <a class="nav-btn active" href="profile.html">NEWEST</a>
+              <a class="nav-btn active filter-btn" id="new">NEW</a>
             </li>
             <li class="nav-item">
-              <a class="nav-btn" id="logout">OLDEST</a>
+              <a class="nav-btn filter-btn" id="last-chance">LAST CHANCE</a>
             </li>
           </ul>
 
-          <div class="searchbar mx-5">
+          <div class="searchbar mx-md-5 mx-sm-1">
             <div class="input-group mb-3 searchbar">
               <input
                 type="text"
@@ -206,6 +206,7 @@
                 placeholder="SEARCH..."
                 aria-label="Search"
                 aria-describedby="search-button"
+                id="searchInput"
               />
               <button
                 class="btn btn-outline-secondary custom-btn px-3"
@@ -228,7 +229,7 @@
             </div>
           </div>
         </div>
-        <div id="listings-container" class="row justify-content-between"></div>
+        <div id="listings-container" class="row"></div>
       </div>
     </main>
 
