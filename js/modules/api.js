@@ -1,4 +1,5 @@
 import { storeToken, getToken, APIKey } from "../modules/auth.js"
+import { listingsPerPage } from "../home.js";
 
 export { getAllListings };
 export { fetchProfile };
@@ -9,7 +10,7 @@ export { getListingSpecific };
 export { listingBid };
 export { fetchListingsByBids };
 export { getListingsSearch };
-export { sortListings };
+export { filterListings };
 
 //export { API_URL }; 
 
@@ -17,24 +18,24 @@ export const API_URL = "https://v2.api.noroff.dev";
 
 
 // Get all listings
-async function getAllListings(newestFirst = true) {
-    const defaultOrder = newestFirst ? "desc" : "asc";
-    const response = await fetch(
-      `${API_URL}/auction/listings`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getToken()}`,
-          "X-Noroff-API-Key": APIKey,
-        },
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Could not load listings");
+async function getAllListings(page = 1, newestFirst = true) {
+  const defaultOrder = newestFirst ? "desc" : "asc";
+  const response = await fetch(
+    `${API_URL}/auction/listings?per_page=${listingsPerPage}&page=${page}&order=${defaultOrder}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+        "X-Noroff-API-Key": APIKey,
+      },
     }
-    const result = await response.json();
-    return result.data;
+  );
+  if (!response.ok) {
+    throw new Error("Could not load listings");
   }
+  const result = await response.json();
+  return result.data;
+}
 
   // Fetch profile
 async function fetchProfile(username) {
@@ -199,9 +200,9 @@ async function fetchListingsByBids (username) {
 }
 
 // Search listings
-async function getListingsSearch(query) {
+async function getListingsSearch(searchTerm) {
   const response = await fetch(
-    `${API_URL}/auction/listings/search?q=${query}`,
+    `${API_URL}/auction/listings/search?query=${encodeURIComponent(searchTerm)}`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -211,45 +212,53 @@ async function getListingsSearch(query) {
     }
   );
   if (!response.ok) {
-    throw new Error("Could not load listings");
+    throw new Error("Could not search listings");
   }
   const result = await response.json();
   return result.data;
 }
 
-// Filter listings
-async function sortListings(tag = "", active = false) {
+// Filters
+async function filterListings(tag = "", active = false, popular = false, newest = false, lastChance = false) {
   let apiUrl = `${API_URL}/auction/listings`;
 
-  // Check if any filtering options are provided
-  if (tag || active) {
-      apiUrl += "?";
-  }
-
-  // Add tag filter if provided
+  // Construct filter parameters
+  let filterParams = [];
   if (tag) {
-      apiUrl += `_tag=${tag}`;
+    filterParams.push(`_tag=${tag}`);
+  }
+  if (active) {
+    filterParams.push("_active=true");
+  }
+  
+  // Add filter parameters to the URL
+  if (filterParams.length > 0) {
+    apiUrl += `?${filterParams.join("&")}`;
   }
 
-  // Add active filter if provided
-  if (active) {
-      // Add '&' if tag filter is also present
-      if (tag) {
-          apiUrl += "&";
-      }
-      apiUrl += "_active=true";
+  // Construct sorting parameters
+  let order = "asc"; // Default order
+  if (popular) {
+    order = "desc";
+  } else if (newest) {
+    order = "desc";
+  } else if (lastChance) {
+    order = "asc"; // Assuming last chance means ending soonest
   }
+
+  // Add sorting parameters to the URL
+  apiUrl += `&per_page=${listingsPerPage}&order=${order}`;
 
   const response = await fetch(apiUrl, {
-      headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getToken()}`,
-          "X-Noroff-API-Key": APIKey,
-      },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+      "X-Noroff-API-Key": APIKey,
+    },
   });
 
   if (!response.ok) {
-      throw new Error("Could not load listings");
+    throw new Error("Could not fetch listings");
   }
 
   const result = await response.json();
