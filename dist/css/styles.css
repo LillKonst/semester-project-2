@@ -71,6 +71,12 @@ body {
   font-family: "assistant";
   border-color: #DACAAA;
 }
+.custom-btn:hover {
+  background-color: #DACAAA;
+  color: #0D0630;
+  font-family: "assistant";
+  border-color: #DACAAA;
+}
 
 .card-custom {
   background-color: #FFFBF6;

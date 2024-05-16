@@ -418,44 +418,44 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 
 
-// Filters and search
-document.getElementById("popular").addEventListener("click", async () => {
-    try {
-        const listings = await filterListings("", false, true);
-        displayListings(listings);
-    } catch (error) {
-        console.error(error);
-    }
-});
+// // Filters and search
+// document.getElementById("popular").addEventListener("click", async () => {
+//     try {
+//         const listings = await filterListings("", false, true);
+//         displayListings(listings);
+//     } catch (error) {
+//         console.error(error);
+//     }
+// });
 
-document.getElementById("new").addEventListener("click", async () => {
-    try {
-        const listings = await filterListings(false, true);
-        displayListings(listings);
-    } catch (error) {
-        console.error(error);
-    }
-});
+// document.getElementById("new").addEventListener("click", async () => {
+//     try {
+//         const listings = await filterListings(false, true);
+//         displayListings(listings);
+//     } catch (error) {
+//         console.error(error);
+//     }
+// });
 
-document.getElementById("last-chance").addEventListener("click", async () => {
-    try {
-        const listings = await filterListings(false, false, true);
-        displayListings(listings);
-    } catch (error) {
-        console.error(error);
-    }
-});
+// document.getElementById("last-chance").addEventListener("click", async () => {
+//     try {
+//         const listings = await filterListings(false, false, true);
+//         displayListings(listings);
+//     } catch (error) {
+//         console.error(error);
+//     }
+// });
 
-// Event listener for search input
-document.getElementById("searchInput").addEventListener("keyup", async (event) => {
-    if (event.key === "Enter") {
-        event.preventDefault();
-        const searchTerm = event.target.value;
-        try {
-            const listings = await getListingsSearch(searchTerm);
-            displayListings(listings);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-});
+// // Event listener for search input
+// document.getElementById("searchInput").addEventListener("keyup", async (event) => {
+//     if (event.key === "Enter") {
+//         event.preventDefault();
+//         const searchTerm = event.target.value;
+//         try {
+//             const listings = await getListingsSearch(searchTerm);
+//             displayListings(listings);
+//         } catch (error) {
+//             console.error(error);
+//         }
+//     }
+// });
