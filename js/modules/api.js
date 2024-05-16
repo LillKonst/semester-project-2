@@ -1,4 +1,5 @@
 import { storeToken, getToken, APIKey } from "../modules/auth.js"
+import { listingsPerPage } from "../home.js";
 
 export { getAllListings };
 export { fetchProfile };
@@ -8,6 +9,8 @@ export { updateAvatar };
 export { getListingSpecific };
 export { listingBid };
 export { fetchListingsByBids };
+export { getListingsSearch };
+export { filterListings };
 
 //export { API_URL }; 
 
@@ -15,24 +18,24 @@ export const API_URL = "https://v2.api.noroff.dev";
 
 
 // Get all listings
-async function getAllListings(newestFirst = true) {
-    const defaultOrder = newestFirst ? "desc" : "asc";
-    const response = await fetch(
-      `${API_URL}/auction/listings`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${getToken()}`,
-          "X-Noroff-API-Key": APIKey,
-        },
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Could not load listings");
+async function getAllListings(page = 1, newestFirst = true) {
+  const defaultOrder = newestFirst ? "desc" : "asc";
+  const response = await fetch(
+    `${API_URL}/auction/listings?per_page=${listingsPerPage}&page=${page}&order=${defaultOrder}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+        "X-Noroff-API-Key": APIKey,
+      },
     }
-    const result = await response.json();
-    return result.data;
+  );
+  if (!response.ok) {
+    throw new Error("Could not load listings");
   }
+  const result = await response.json();
+  return result.data;
+}
 
   // Fetch profile
 async function fetchProfile(username) {
@@ -147,28 +150,30 @@ async function getListingSpecific(listingId) {
 
 // Make a bid
 async function listingBid(listingId, bidData) {
- 
-
   const response = await fetch(
-    `${API_URL}/auction/listings/${listingId}/bids`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getToken()}`,
-        "X-Noroff-API-Key": APIKey,
-      },
-      body: JSON.stringify(bidData),
-    }
+      `${API_URL}/auction/listings/${listingId}/bids`,
+      {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${getToken()}`,
+              "X-Noroff-API-Key": APIKey,
+          },
+          body: JSON.stringify(bidData),
+      }
   );
 
   if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(`Could not post bid: ${errorData.message}`);
+      const errorData = await response.json();
+      console.error('Failed to register bid:', errorData);
+      throw new Error(`Failed to register your bid: ${errorData.message}`);
   }
 
   return await response.json();
 }
+
+
+// Fetch Listings by bids
 
 async function fetchListingsByBids (username) {
    
@@ -192,4 +197,70 @@ async function fetchListingsByBids (username) {
 
   return await response.json();
 
+}
+
+// Search listings
+async function getListingsSearch(searchTerm) {
+  const response = await fetch(
+    `${API_URL}/auction/listings/search?query=${encodeURIComponent(searchTerm)}`,
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+        "X-Noroff-API-Key": APIKey,
+      },
+    }
+  );
+  if (!response.ok) {
+    throw new Error("Could not search listings");
+  }
+  const result = await response.json();
+  return result.data;
+}
+
+// Filters
+async function filterListings(tag = "", active = false, popular = false, newest = false, lastChance = false) {
+  let apiUrl = `${API_URL}/auction/listings`;
+
+  // Construct filter parameters
+  let filterParams = [];
+  if (tag) {
+    filterParams.push(`_tag=${tag}`);
+  }
+  if (active) {
+    filterParams.push("_active=true");
+  }
+  
+  // Add filter parameters to the URL
+  if (filterParams.length > 0) {
+    apiUrl += `?${filterParams.join("&")}`;
+  }
+
+  // Construct sorting parameters
+  let order = "asc"; // Default order
+  if (popular) {
+    order = "desc";
+  } else if (newest) {
+    order = "desc";
+  } else if (lastChance) {
+    order = "asc"; // Assuming last chance means ending soonest
+  }
+
+  // Add sorting parameters to the URL
+  apiUrl += `&per_page=${listingsPerPage}&order=${order}`;
+
+  const response = await fetch(apiUrl, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+      "X-Noroff-API-Key": APIKey,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Could not fetch listings");
+  }
+
+  const result = await response.json();
+  return result.data;
 }

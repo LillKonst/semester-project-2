@@ -6,6 +6,33 @@ function getListingIdFromQuery() {
   return new URLSearchParams(window.location.search).get("id");
 }
 
+function showLoadingIndicator() {
+  const listingDisplay = document.getElementById("listing-container");
+  if (listingDisplay) {
+    listingDisplay.innerHTML = "<p>Loading...</p>";
+  } else {
+    console.error("Listings container not found in DOM");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  try {
+    showLoadingIndicator(); 
+    await displayListing();
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+function showError(message){
+    const listingDisplay = document.getElementById("listing-container");
+    if (listingDisplay) {
+        listingDisplay.innerHTML = `<p>Error: ${message}</p>`;
+    } else {
+        console.error(`Error: ${message}`);
+    }
+}
+
 async function listingData() {
   const listingId = getListingIdFromQuery();
   const errorContainer = document.querySelector(".postData-error");
@@ -260,6 +287,7 @@ async function displayListing(listing) {
 // Create a container for input and submit button
 const inputContainer = document.createElement("div");
 inputContainer.classList.add("d-flex", "align-items-center");
+listingDisplay.appendChild(inputContainer);
 
 // Create input element
 const bidInput = document.createElement("input");
@@ -276,8 +304,11 @@ submitBtn.setAttribute("id", "bidBtn");
 submitBtn.innerHTML = "BID";
 inputContainer.appendChild(submitBtn);
 
-// Append the container to the listingDetails element
-listingDisplay.appendChild(inputContainer);
+// Error message
+const errorMessage = document.createElement("p");
+errorMessage.setAttribute ("id", "bidError");
+errorMessage.classList.add("p-1");
+listingDetails.appendChild(errorMessage);
 
 // Add a resize event listener to handle changes in window size
 window.addEventListener('resize', function() {

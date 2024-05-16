@@ -156,6 +156,19 @@ document.getElementById("ive-bid-on").addEventListener("click", async () => {
     }
 });
 
+document.getElementById("my-listings").addEventListener("click", async () => {
+    console.log("My listings clicked!");
+    try {
+        const loggedInUser = JSON.parse(localStorage.getItem("profile"));
+        const username = loggedInUser.name;
+        await displayListingsByUser(username, false);
+    } catch (error) {
+        console.error("Error displaying listings by user:", error);
+    }
+});
+
+
+
 
 
 
