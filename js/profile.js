@@ -132,23 +132,3 @@ listingText.appendChild(listingTime);
 document.addEventListener("DOMContentLoaded", () => {
     displayUserProfile();
 });
-
-document.getElementById("ive-bid-on").addEventListener("click", async () => {
-    try {
-        const loggedInUser = JSON.parse(localStorage.getItem("profile"));
-        const username = loggedInUser.name;
-        await displayListingsByUser(username, true); // Pass true to indicate displaying listings the user has bid on
-    } catch (error) {
-        console.error("Error displaying listings by user:", error);
-    }
-});
-
-document.getElementById("my-listings").addEventListener("click", async () => {
-    try {
-        const loggedInUser = JSON.parse(localStorage.getItem("profile"));
-        const username = loggedInUser.name;
-        await displayListingsByUser(username, false);
-    } catch (error) {
-        console.error("Error displaying listings by user:", error);
-    }
-});

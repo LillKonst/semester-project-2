@@ -171,7 +171,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Get elements
     const updateBtn = document.getElementById("updateProfile");
     const imageUrlInput = document.getElementById("updateInput1");
-    const profileImage = document.getElementById("profileImage");
+    const profileImage = document.getElementById("profileImageUpdate");
 
     // Fetch user profile
     const loggedInUser = JSON.parse(localStorage.getItem("profile"));
