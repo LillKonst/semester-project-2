@@ -6,32 +6,32 @@ function getListingIdFromQuery() {
   return new URLSearchParams(window.location.search).get("id");
 }
 
-function showLoadingIndicator() {
-  const listingDisplay = document.getElementById("listing-container");
-  if (listingDisplay) {
-    listingDisplay.innerHTML = "<p>Loading...</p>";
-  } else {
-    console.error("Listings container not found in DOM");
-  }
-}
+// function showLoadingIndicator() {
+//   const listingDisplay = document.getElementById("listing-container");
+//   if (listingDisplay) {
+//     listingDisplay.innerHTML = "<p>Loading...</p>";
+//   } else {
+//     console.error("Listings container not found in DOM");
+//   }
+// }
 
-document.addEventListener("DOMContentLoaded", async () => {
-  try {
-    showLoadingIndicator(); 
-    await displayListing();
-  } catch (error) {
-    console.error(error);
-  }
-});
+// document.addEventListener("DOMContentLoaded", async () => {
+//   try {
+//     showLoadingIndicator(); 
+//     await displayListing();
+//   } catch (error) {
+//     console.error(error);
+//   }
+// });
 
-function showError(message){
-    const listingDisplay = document.getElementById("listing-container");
-    if (listingDisplay) {
-        listingDisplay.innerHTML = `<p>Error: ${message}</p>`;
-    } else {
-        console.error(`Error: ${message}`);
-    }
-}
+// function showError(message){
+//     const listingDisplay = document.getElementById("listing-container");
+//     if (listingDisplay) {
+//         listingDisplay.innerHTML = `<p>Error: ${message}</p>`;
+//     } else {
+//         console.error(`Error: ${message}`);
+//     }
+// }
 
 async function listingData() {
   const listingId = getListingIdFromQuery();
@@ -76,7 +76,6 @@ async function displayListing(listing) {
 
 
     if (listing.media && listing.media.length > 0) {
-        // If there's only one image, display it without carousel
         if (listing.media.length === 1) {
           const image = document.createElement("img");
           image.setAttribute("src", listing.media[0].url);
@@ -84,7 +83,6 @@ async function displayListing(listing) {
           image.classList.add("rounded", "w-100", "h-350px", "object-cover", "listing-img");
           imageContainer.appendChild(image);
         } else {
-          // If there are multiple images, create a carousel
           const imageCarousel = document.createElement("div");
           imageCarousel.classList.add("carousel", "slide");
           imageCarousel.setAttribute("id", "image-carousel");
@@ -111,7 +109,7 @@ async function displayListing(listing) {
             carouselItem.appendChild(image);
             carouselInner.appendChild(carouselItem);
   
-            // Create carousel indicators
+  
             const indicator = document.createElement("button");
             indicator.setAttribute("type", "button");
             indicator.setAttribute("data-bs-target", "#image-carousel");
@@ -157,11 +155,6 @@ async function displayListing(listing) {
       const sellerContainer = document.createElement("div");
       sellerContainer.classList.add("col-8", "pt-3", "mx-4");
       listingDisplay.appendChild(sellerContainer);
-
-    //   const seller = document.createElement("p");
-    //   seller.classList.add("fs-7", "fw-bold");
-    //   seller.innerHTML = `Seller:`;
-    //   sellerContainer.appendChild(seller);
 
       const userContainer = document.createElement("div");
       userContainer.classList.add("row");
@@ -277,19 +270,16 @@ async function displayListing(listing) {
     });
 });
 
+const errorMessage = document.createElement("p");
+errorMessage.setAttribute ("id", "bidError");
+errorMessage.classList.add("p-1", "text-center");
+listingDisplay.appendChild(errorMessage);
 
-    // const bidBtn = document.createElement("button");
-    // bidBtn.classList.add("btn","custom-btn", "m-3");
-    // bidBtn.innerHTML = `PLACE A BID`;
-    // listingDetails.appendChild(bidBtn);
-
-
-// Create a container for input and submit button
 const inputContainer = document.createElement("div");
-inputContainer.classList.add("d-flex", "align-items-center");
+inputContainer.classList.add("col-12", "col-sm-8", "d-flex", "align-items-center", "flex-column", "flex-sm-row");
 listingDisplay.appendChild(inputContainer);
 
-// Create input element
+
 const bidInput = document.createElement("input");
 bidInput.classList.add("form-control", "m-3", "border-custom", "inputs");
 bidInput.setAttribute("type", "number");
@@ -297,32 +287,21 @@ bidInput.setAttribute("placeholder", "Enter your bid amount");
 bidInput.setAttribute("id", "bidInput");
 inputContainer.appendChild(bidInput);
 
-// Create submit button
 const submitBtn = document.createElement("button");
-submitBtn.classList.add("btn", "custom-btn", "m-3");
+submitBtn.classList.add("btn", "custom-btn", "my-3", "px-3");
 submitBtn.setAttribute("id", "bidBtn");
 submitBtn.innerHTML = "BID";
 inputContainer.appendChild(submitBtn);
 
-// Error message
-const errorMessage = document.createElement("p");
-errorMessage.setAttribute ("id", "bidError");
-errorMessage.classList.add("p-1");
-listingDetails.appendChild(errorMessage);
-
-// Add a resize event listener to handle changes in window size
 window.addEventListener('resize', function() {
-    // Get the width of the window
     const screenWidth = window.innerWidth;
   
-    // Check if the screen width is less than 600px
+   
     if (screenWidth < 600) {
-      // Change the display property of infoContainer to flex-column
       infoContainer.classList.add('flex-column');
       listingDetails.classList.add("col-12");
       bidContainer.classList.add('col-12');
     } else {
-      // Change the layout for larger screens
       infoContainer.classList.remove('flex-column');
       listingDetails.classList.remove("col-12");
       bidContainer.classList.remove('col-12');

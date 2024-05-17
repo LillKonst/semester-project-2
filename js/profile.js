@@ -5,17 +5,12 @@ export { displayUserProfile };
 
 async function displayUserProfile() {
     try {
-        console.log("Fetching user's profile...");
         const loggedInUser = JSON.parse(localStorage.getItem("profile"));
         const username = loggedInUser.name;
-
-        console.log("Fetching profile data for user:", username);
         const userProfile = await fetchProfile(username);
-        console.log("User profile:", userProfile);
 
         const userName = document.getElementById("userName");
         userName.textContent = username;
-        console.log("Displaying username:", username);
 
         const credit = userProfile.credits;
         const creditElement = document.getElementById("credit");
@@ -25,11 +20,9 @@ async function displayUserProfile() {
         if (userProfile.avatar && userProfile.avatar.url) {
             profileImage.src = userProfile.avatar.url;
             profileImage.alt = userProfile.avatar.alt;
-            console.log("Displayed user's avatar.");
         } else {
             profileImage.src = "https://images.unsplash.com/photo-1515405295579-ba7b45403062?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
             profileImage.alt = "Default Avatar";
-            console.log("Displayed default avatar.");
         }
         
         await displayListingsByUser(username, false);
@@ -48,10 +41,6 @@ async function displayListingsByUser(username, isBids) {
         } else {
             listings = await fetchListingsByUser(username);
         }
-
-        console.log("Listings:", listings);
-
-        const listingsData = listings.data;
 
         //const listingsByUser = await fetchListingsByUser(username);
         const listingsContainer = document.getElementById("listings-container");
@@ -141,12 +130,10 @@ listingText.appendChild(listingTime);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM fully loaded. Displaying user profile...");
     displayUserProfile();
 });
 
 document.getElementById("ive-bid-on").addEventListener("click", async () => {
-    console.log("I've bid on clicked!");
     try {
         const loggedInUser = JSON.parse(localStorage.getItem("profile"));
         const username = loggedInUser.name;
@@ -157,7 +144,6 @@ document.getElementById("ive-bid-on").addEventListener("click", async () => {
 });
 
 document.getElementById("my-listings").addEventListener("click", async () => {
-    console.log("My listings clicked!");
     try {
         const loggedInUser = JSON.parse(localStorage.getItem("profile"));
         const username = loggedInUser.name;
