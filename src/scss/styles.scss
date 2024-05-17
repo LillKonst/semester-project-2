@@ -203,10 +203,6 @@ a {
     background-color: $tertiary;
 }
 
-.top-padding {
-    padding-top: 80px; 
-}
-
 #listings-top {
     display: flex;
     justify-content: space-between;
@@ -242,3 +238,6 @@ a {
     width: 100px;
 }
 
+.custom-height {
+    height: 90px;
+}

@@ -385,11 +385,15 @@ async function displayListings(listings = null) {
       listingBids.appendChild(listingNumberOfBids);
     };
 
+    const btnContainer = document.createElement("div");
+    btnContainer.classList.add("m-2");
+    allListingsContainer.appendChild(btnContainer);
+
     const loadMoreButton = document.createElement("button");
         loadMoreButton.setAttribute("id", "more-button");
-        loadMoreButton.classList.add("custom-btn");
+        loadMoreButton.classList.add("btn", "custom-btn");
         loadMoreButton.textContent = "Load More";
-        allListingsContainer.appendChild(loadMoreButton);
+        btnContainer.appendChild(loadMoreButton);
 
     loadMoreButton.addEventListener('click', async () => {
          try {
