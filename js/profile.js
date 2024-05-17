@@ -152,35 +152,3 @@ document.getElementById("my-listings").addEventListener("click", async () => {
         console.error("Error displaying listings by user:", error);
     }
 });
-
-
-
-
-
-
-// Get references to the h2 elements
-const myListingHeading = document.getElementById("my-listings");
-const iveBidOnHeading = document.getElementById("ive-bid-on");
-
-// Add click event listeners to the h2 elements
-myListingHeading.addEventListener("click", () => setActiveTab(myListingHeading, iveBidOnHeading));
-iveBidOnHeading.addEventListener("click", () => setActiveTab(iveBidOnHeading, myListingHeading));
-
-// Function to toggle active tab
-function setActiveTab(activeHeading, inactiveHeading) {
-  // Remove active class from all h2 elements
-  document.querySelectorAll("h2").forEach((heading) => {
-    heading.classList.remove("active");
-  });
-  
-  // Add active class to the clicked h2 element
-  activeHeading.classList.add("active");
-  
-  // Remove secondary class from all h2 elements inside the specific div
-  activeHeading.parentElement.querySelectorAll("h2").forEach((heading) => {
-    heading.classList.remove("secondary");
-  });
-  
-  // Add secondary class to the inactive h2 inside the specific div
-  inactiveHeading.classList.add("secondary");
-}
