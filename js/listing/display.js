@@ -80,7 +80,7 @@ async function displayListing(listing) {
           const image = document.createElement("img");
           image.setAttribute("src", listing.media[0].url);
           image.setAttribute("alt", listing.media[0].alt);
-          image.classList.add("rounded", "w-100", "h-350px", "object-cover", "listing-img");
+          image.classList.add("rounded", "w-100", "object-cover", "listing-img");
           imageContainer.appendChild(image);
         } else {
           const imageCarousel = document.createElement("div");
