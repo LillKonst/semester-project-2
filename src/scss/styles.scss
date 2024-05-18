@@ -236,6 +236,13 @@ a {
 .custom-thumbnail {
     height: 100px;
     width: 100px;
+    object-fit: cover;
+}
+
+.search-thumbnail {
+    height: 50px;
+    width: 50px;
+    object-fit: cover;
 }
 
 .custom-height {
