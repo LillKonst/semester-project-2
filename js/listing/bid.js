@@ -52,11 +52,12 @@ document.addEventListener("elementsReady", async () => {
     }
 
     async function placeBid(bidAmount) {
-        const bidData = { amount: bidAmount };
-        const response = await listingBid(listingId, bidData);
-        console.log('Bid response:', response);
-        if (!response.ok) {
-            throw new Error('Failed to place bid');
+        try {
+            const bidData = { amount: bidAmount };
+            const response = await listingBid(listingId, bidData);
+            console.log('Bid response:', response);
+        } catch(error) {
+            console.log('An error occured:', error);
         }
     }
 

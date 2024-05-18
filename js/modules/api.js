@@ -10,7 +10,6 @@ export { getListingSpecific };
 export { listingBid };
 export { fetchListingsByBids };
 export { getListingsSearch };
-export { filterListings };
 
 //export { API_URL }; 
 
