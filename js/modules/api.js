@@ -98,36 +98,40 @@ async function fetchProfile(username) {
     }
 
 // Update avatar
-async function updateAvatar(username, newProfileImgUrl) {
+async function updateAvatar(username, newImageUrl) {
   try {
-      const response = await fetch(
-       `${API_URL}/auction/profiles/${username}`,
+    const response = await fetch(
+      `${API_URL}/auction/profiles/${username}`,
       {
         method: "PUT",
         headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${getToken()}`,
-        "X-Noroff-API-Key": APIKey,
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getToken()}`,
+          "X-Noroff-API-Key": APIKey,
         },
         body: JSON.stringify({
           avatar: {
-            url: newProfileImgUrl,
+            url: newImageUrl,
             alt: "Profile Image",
           },
         }),
       }
-      );
-      
-  if (!response.ok) {
-    throw new Error("Failed to update profile image");
-  }
-      
-   // Profile image updated successfully
-  console.log("Profile image updated successfully");
+    );
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Error response text:", errorText);
+      throw new Error(`Failed to update profile image: ${response.statusText}`);
+    }
+
+    // Profile image updated successfully
+    return true;
   } catch (error) {
     console.error("Error updating profile image:", error.message);
+    return false;
   }
 }
+
 
 // Get listing specific
 async function getListingSpecific(listingId) {
@@ -202,7 +206,7 @@ async function fetchListingsByBids (username) {
 // Search listings
 async function getListingsSearch(searchTerm) {
   const response = await fetch(
-    `${API_URL}/auction/listings/search?query=${encodeURIComponent(searchTerm)}`,
+    `${API_URL}/auction/listings/search?q=${encodeURIComponent(searchTerm)}`,
     {
       headers: {
         "Content-Type": "application/json",
@@ -215,8 +219,10 @@ async function getListingsSearch(searchTerm) {
     throw new Error("Could not search listings");
   }
   const result = await response.json();
-  return result.data;
+  return result;
 }
+
+
 
 // Filters
 async function filterListings(
