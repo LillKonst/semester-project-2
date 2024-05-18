@@ -10,8 +10,7 @@ export { getListingSpecific };
 export { listingBid };
 export { fetchListingsByBids };
 export { getListingsSearch };
-
-//export { API_URL }; 
+export { API_URL }; 
 
 const API_URL = "https://v2.api.noroff.dev";
 
