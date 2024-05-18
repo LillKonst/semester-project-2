@@ -203,16 +203,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 //     }
 // });
 
-// // Event listener for search input
-// document.getElementById("searchInput").addEventListener("keyup", async (event) => {
-//     if (event.key === "Enter") {
-//         event.preventDefault();
-//         const searchTerm = event.target.value;
-//         try {
-//             const listings = await getListingsSearch(searchTerm);
-//             displayListings(listings);
-//         } catch (error) {
-//             console.error(error);
-//         }
-//     }
-// });
+// Event listener for search input
+document.getElementById("searchInput").addEventListener("keyup", async (event) => {
+    if (event.key === "Enter") {
+        event.preventDefault();
+        const searchTerm = event.target.value;
+        try {
+            const listings = await getListingsSearch(searchTerm);
+            displayListings(listings);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+});
