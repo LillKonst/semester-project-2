@@ -6,33 +6,6 @@ function getListingIdFromQuery() {
   return new URLSearchParams(window.location.search).get("id");
 }
 
-// function showLoadingIndicator() {
-//   const listingDisplay = document.getElementById("listing-container");
-//   if (listingDisplay) {
-//     listingDisplay.innerHTML = "<p>Loading...</p>";
-//   } else {
-//     console.error("Listings container not found in DOM");
-//   }
-// }
-
-// document.addEventListener("DOMContentLoaded", async () => {
-//   try {
-//     showLoadingIndicator(); 
-//     await displayListing();
-//   } catch (error) {
-//     console.error(error);
-//   }
-// });
-
-// function showError(message){
-//     const listingDisplay = document.getElementById("listing-container");
-//     if (listingDisplay) {
-//         listingDisplay.innerHTML = `<p>Error: ${message}</p>`;
-//     } else {
-//         console.error(`Error: ${message}`);
-//     }
-// }
-
 async function listingData() {
   const listingId = getListingIdFromQuery();
   const errorContainer = document.querySelector(".postData-error");

@@ -174,32 +174,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-
-// // Filters and search
-// document.getElementById("popular").addEventListener("click", async () => {
-//     try {
-//         const listings = await filterListings("", false, true);
-//         displayListings(listings);
-//     } catch (error) {
-//         console.error(error);
-//     }
-// });
-
-// document.getElementById("new").addEventListener("click", async () => {
-//     try {
-//         const listings = await filterListings(false, true);
-//         displayListings(listings);
-//     } catch (error) {
-//         console.error(error);
-//     }
-// });
-
-// document.getElementById("last-chance").addEventListener("click", async () => {
-//     try {
-//         const listings = await filterListings(false, false, true);
-//         displayListings(listings);
-//     } catch (error) {
-//         console.error(error);
-//     }
-// });
-
