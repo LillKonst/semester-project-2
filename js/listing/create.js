@@ -30,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         thumbnailContainer.appendChild(thumbnail);
     }
 
-    // Form submission handling
     const newListingForm = document.getElementById("newListingForm");
     newListingForm.addEventListener("submit", async (event) => {
         event.preventDefault();

@@ -145,6 +145,11 @@ a {
   border-radius: 5px;
   object-fit: cover;
 }
+@media (max-width: 600px) {
+  .listing-img {
+    height: 300px;
+  }
+}
 
 .border-bottom {
   border-color: #DACAAA !important;

@@ -73,12 +73,10 @@ function displaySearchResults(data) {
 
     });
   
-    searchResultsContainer.style.display = "block"; // Show the results container
+    searchResultsContainer.style.display = "block";
   }
   
 
-  
-  // Event listener for search input (live search)
   document.getElementById("searchInput").addEventListener("input", async (event) => {
     const searchTerm = event.target.value.trim();
     if (searchTerm) {

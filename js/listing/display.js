@@ -6,33 +6,6 @@ function getListingIdFromQuery() {
   return new URLSearchParams(window.location.search).get("id");
 }
 
-// function showLoadingIndicator() {
-//   const listingDisplay = document.getElementById("listing-container");
-//   if (listingDisplay) {
-//     listingDisplay.innerHTML = "<p>Loading...</p>";
-//   } else {
-//     console.error("Listings container not found in DOM");
-//   }
-// }
-
-// document.addEventListener("DOMContentLoaded", async () => {
-//   try {
-//     showLoadingIndicator(); 
-//     await displayListing();
-//   } catch (error) {
-//     console.error(error);
-//   }
-// });
-
-// function showError(message){
-//     const listingDisplay = document.getElementById("listing-container");
-//     if (listingDisplay) {
-//         listingDisplay.innerHTML = `<p>Error: ${message}</p>`;
-//     } else {
-//         console.error(`Error: ${message}`);
-//     }
-// }
-
 async function listingData() {
   const listingId = getListingIdFromQuery();
   const errorContainer = document.querySelector(".postData-error");
@@ -80,7 +53,7 @@ async function displayListing(listing) {
           const image = document.createElement("img");
           image.setAttribute("src", listing.media[0].url);
           image.setAttribute("alt", listing.media[0].alt);
-          image.classList.add("rounded", "w-100", "h-350px", "object-cover", "listing-img");
+          image.classList.add("rounded", "w-100", "object-cover", "listing-img");
           imageContainer.appendChild(image);
         } else {
           const imageCarousel = document.createElement("div");
@@ -276,7 +249,7 @@ errorMessage.classList.add("p-1", "text-center");
 listingDisplay.appendChild(errorMessage);
 
 const inputContainer = document.createElement("div");
-inputContainer.classList.add("col-12", "col-sm-8", "d-flex", "align-items-center", "flex-column", "flex-sm-row");
+inputContainer.classList.add("col-12", "col-sm-8", "d-flex", "align-items-center", "flex-column", "flex-sm-row", "mx-3");
 listingDisplay.appendChild(inputContainer);
 
 
