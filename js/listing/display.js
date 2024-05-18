@@ -276,7 +276,7 @@ errorMessage.classList.add("p-1", "text-center");
 listingDisplay.appendChild(errorMessage);
 
 const inputContainer = document.createElement("div");
-inputContainer.classList.add("col-12", "col-sm-8", "d-flex", "align-items-center", "flex-column", "flex-sm-row");
+inputContainer.classList.add("col-12", "col-sm-8", "d-flex", "align-items-center", "flex-column", "flex-sm-row", "mx-3");
 listingDisplay.appendChild(inputContainer);
 
 
