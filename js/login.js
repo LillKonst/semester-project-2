@@ -58,6 +58,7 @@ function isLoggedIn(email) {
     return localStorage.getItem("logged-in-email") === email; 
 }
 
+// login button 
 document.getElementById("loginForm").addEventListener("submit", function (event) {
     event.preventDefault();
     const email = document.getElementById("loginInput1").value;
@@ -71,6 +72,7 @@ document.getElementById("loginForm").addEventListener("submit", function (event)
     });
 });
 
+// If user already logged in, go directly to logged in page
 window.addEventListener("load", () => {
     if (localStorage.getItem("logged-in-email")) {
         window.location.href = "/html/home/index.html";

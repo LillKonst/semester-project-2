@@ -132,3 +132,4 @@ listingText.appendChild(listingTime);
 document.addEventListener("DOMContentLoaded", () => {
     displayUserProfile();
 });
+

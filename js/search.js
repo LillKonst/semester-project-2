@@ -4,9 +4,7 @@ import { MAX_TEXT_LENGTH } from "../js/home.js";
 // Function to handle live search and display results
 async function handleLiveSearch(searchTerm) {
     try {
-      console.log("Searching for:", searchTerm);
       const listings = await getListingsSearch(searchTerm);
-      console.log("Search results:", listings);
       displaySearchResults(listings);
     } catch (error) {
       console.error("Error during search:", error);
@@ -15,32 +13,31 @@ async function handleLiveSearch(searchTerm) {
 
   
 function displaySearchResults(data) {
-    console.log("Displaying search results:", data); // Add this line
     const searchResultsContainer = document.getElementById("searchResults");
-    searchResultsContainer.innerHTML = ""; // Clear previous results
+    searchResultsContainer.innerHTML = "";
   
     if (!data) {
-      searchResultsContainer.style.display = "none"; // Hide results container if no data
+      searchResultsContainer.style.display = "none";
       return;
     }
   
     if (data.error) {
-      searchResultsContainer.innerHTML = `<div class="dropdown-item">${data.error}</div>`; // Display error message
-      searchResultsContainer.style.display = "block"; // Show the results container with error message
+      searchResultsContainer.innerHTML = `<div class="dropdown-item">${data.error}</div>`;
+      searchResultsContainer.style.display = "block"; 
       return;
     }
   
-    const listings = data.data; // Extract the listings from the data object
+    const listings = data.data;
   
     if (!Array.isArray(listings) || listings.length === 0) {
-      searchResultsContainer.style.display = "none"; // Hide results container if no search results
+      searchResultsContainer.style.display = "none"; 
       return;
     }
   
     listings.forEach(listing => {
       const resultItem = document.createElement("a");
       resultItem.classList.add("dropdown-item", "d-flex", "m-2");
-      resultItem.href = `../listings/index.html?id=${listing.id}&title=${listing.title}`; // Set the href attribute
+      resultItem.href = `../listings/index.html?id=${listing.id}&title=${listing.title}`;
       searchResultsContainer.appendChild(resultItem);
     
     
@@ -77,12 +74,14 @@ function displaySearchResults(data) {
   }
   
 
+  
+  // Event listener for search input (live search)
   document.getElementById("searchInput").addEventListener("input", async (event) => {
     const searchTerm = event.target.value.trim();
     if (searchTerm) {
       await handleLiveSearch(searchTerm);
     } else {
-      document.getElementById("searchResults").style.display = "none"; // Hide results if search is cleared
+      document.getElementById("searchResults").style.display = "none";
     }
   });
   
