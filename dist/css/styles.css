@@ -182,10 +182,6 @@ a {
   background-color: #FFFBF6;
 }
 
-.top-padding {
-  padding-top: 80px;
-}
-
 #listings-top {
   display: flex;
   justify-content: space-between;
@@ -215,6 +211,13 @@ a {
 .custom-thumbnail {
   height: 100px;
   width: 100px;
+  object-fit: cover;
+}
+
+.search-thumbnail {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
 }
 
 .custom-height {
