@@ -46,7 +46,7 @@ loginBtn.addEventListener("click", function() {
 nav.appendChild(loginBtn);
 
 const registerBtn = document.createElement("a")
-registerBtn.classList.add("btn", "custom-btn", "m-2");
+registerBtn.classList.add("btn", "custom-btn", "m-2", "d-flex", "justify-content-center", "align-items-center");
 registerBtn.innerHTML = `REGISTER`;
 registerBtn.addEventListener("click", function() {
     const registerModal = new bootstrap.Modal(document.getElementById("registerModal"));
