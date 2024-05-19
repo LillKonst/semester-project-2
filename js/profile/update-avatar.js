@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         imageUrlInput.value = "";
       } catch (error) {
         console.error("Error updating profile image:", error);
+        throw error; 
       }
     });
 
@@ -68,6 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   } catch (error) {
     console.error("Error fetching or displaying user profile:", error);
+    throw error; 
   }
 });
 

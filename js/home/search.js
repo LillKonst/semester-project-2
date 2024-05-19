@@ -13,6 +13,7 @@ async function handleLiveSearch(searchTerm) {
         displaySearchResults(listings);
     } catch (error) {
         console.error("Error during search:", error);
+        throw error;
     }
 }
 
@@ -89,6 +90,7 @@ function displaySearchResults(data) {
             displaySearchResults(moreResults);
         } catch (error) {
             console.error(error);
+            throw error;
         }
     });
 

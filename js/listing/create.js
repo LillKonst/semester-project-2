@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Listing created successfully!");
         } catch (error) {
             console.error(error);
+            throw error; 
         }
     });
 
