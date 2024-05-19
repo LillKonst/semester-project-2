@@ -29,6 +29,7 @@ async function displayUserProfile() {
 
     } catch (error) {
         console.error("Error fetching and displaying user profile:", error);
+        throw error;
     }
 }
 
@@ -118,6 +119,7 @@ listingText.appendChild(listingTime);
     
     } catch (error) {
         console.error("Error displaying listings by user:", error);
+        throw error; 
     }
 }
 

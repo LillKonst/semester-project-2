@@ -50,6 +50,7 @@ document.addEventListener("elementsReady", async () => {
             const response = await listingBid(listingId, bidData);
         } catch(error) {
             console.error('An error occured:', error);
+            throw error;
         }
     }
 

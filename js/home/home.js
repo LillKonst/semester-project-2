@@ -37,6 +37,9 @@ async function displayListings(listings = null) {
       listings = await getAllListings(currentPage);
     }
 
+    const currentDateTime = new Date();
+    listings = listings.filter(listing => new Date(listing.endsAt) > currentDateTime);
+
     const allListingsContainer = document.getElementById("listings-container");
     if (!allListingsContainer) {
       throw new Error("Listings container not found in DOM");
