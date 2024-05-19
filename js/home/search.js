@@ -1,22 +1,18 @@
 import { getListingsSearch } from "../modules/api.js";
 import { MAX_TEXT_LENGTH } from "./home.js";
 
-
-const listingsPerSearch = 10; 
-let currentPage = 1; 
 let searchTerm = '';
 
 // Function to handle live search and display results
 async function handleLiveSearch(searchTerm) {
     try {
-        const listings = await getListingsSearch(searchTerm, currentPage); // Pass currentPage to getListingsSearch
+        const listings = await getListingsSearch(searchTerm); // No need to pass currentPage
         displaySearchResults(listings);
     } catch (error) {
         console.error("Error during search:", error);
         throw error;
     }
 }
-
 
 function displaySearchResults(data) {
     const searchResultsContainer = document.getElementById("searchResults");
@@ -29,22 +25,18 @@ function displaySearchResults(data) {
 
     if (data.error) {
         searchResultsContainer.innerHTML = `<div class="dropdown-item">${data.error}</div>`;
-        searchResultsContainer.style.display = "block"; 
+        searchResultsContainer.style.display = "block";
         return;
     }
 
     const listings = data.data;
 
     if (!Array.isArray(listings) || listings.length === 0) {
-        searchResultsContainer.style.display = "none"; 
+        searchResultsContainer.style.display = "none";
         return;
     }
 
-    if (currentPage === 1) {
-        searchResultsContainer.innerHTML = "";
-    }
-
-    for (let i = 0; i < Math.min(listingsPerSearch, listings.length); i++) {
+    for (let i = 0; i < listings.length; i++) {
         const listing = listings[i];
         const resultItem = document.createElement("a");
         resultItem.classList.add("dropdown-item", "d-flex", "m-2");
@@ -70,29 +62,12 @@ function displaySearchResults(data) {
 
         const resultTitle = document.createElement("h2");
         resultTitle.classList.add("card-title", "px-2", "fs-4");
-        const truncatedTitle = listing.title.length > MAX_TEXT_LENGTH
-            ? listing.title.substring(0, MAX_TEXT_LENGTH) + "..."
-            : listing.title;
+        const truncatedTitle = listing.title.length > MAX_TEXT_LENGTH ?
+            listing.title.substring(0, MAX_TEXT_LENGTH) + "..." :
+            listing.title;
         resultTitle.innerHTML = truncatedTitle || "No Title";
         resultItem.appendChild(resultTitle);
     }
-
-    const loadMoreButton = document.createElement("button");
-    loadMoreButton.setAttribute("id", "more-button");
-    loadMoreButton.classList.add("btn", "custom-btn");
-    loadMoreButton.textContent = "Load More";
-    searchResultsContainer.appendChild(loadMoreButton);
-
-    loadMoreButton.addEventListener('click', async () => {
-        try {
-            currentPage++;
-            const moreResults = await handleLiveSearch(searchTerm);
-            displaySearchResults(moreResults);
-        } catch (error) {
-            console.error(error);
-            throw error;
-        }
-    });
 
     searchResultsContainer.style.display = "block";
 }
