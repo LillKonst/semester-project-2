@@ -121,9 +121,9 @@ async function login(email, password) {
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
         },
-    //     body: JSON.stringify({
-    //         name: "User api key",
-    //     }),
+        body: JSON.stringify({
+            name: "User api key",
+        }),
     });
 
     const APIKeyResponsJSON = await APIKeyRespons.json(); 
