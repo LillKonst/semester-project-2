@@ -1,73 +1,65 @@
-import { isLoggedIn } from "./login.js";
-
 // header logged in or out
 document.addEventListener("DOMContentLoaded", function() {
+    const loggedIn = localStorage.getItem("username");
   
-    const headerLoggedIn = document.getElementById("loggedInMenu");
-    const headerLoggedOut = document.getElementById("loggedOutMenu");
-  
-    if (isLoggedIn) {
-      headerLoggedIn.classList.remove("d-none");
-      headerLoggedOut.classList.add("d-none");
-    } else {
-      headerLoggedIn.classList.add("d-none");
-      headerLoggedOut.classList.remove("d-none");
-    }
+const nav = document.getElementById("nav"); 
+nav.classList.add("nav", "ms-auto",  "p-2", "my-3", "mob-menu");
+
+if (loggedIn) {
+const homeBtn = document.createElement("a")
+homeBtn.classList.add("nav-btn");
+homeBtn.innerHTML = `HOME`;
+homeBtn.addEventListener("click", () => {
+    window.location.href = `../home/index.html`;
   });
-  
-//   function isLoggedIn(username) {
-//     const username = localStorage.getItem('username'); 
-//     return !!username; 
-//   }
+nav.appendChild(homeBtn);
+
+const profileBtn = document.createElement("a")
+profileBtn.classList.add("nav-btn");
+profileBtn.innerHTML = `PROFILE`;
+profileBtn.addEventListener("click", () => {
+    window.location.href = `../profile/index.html`;
+  });
+nav.appendChild(profileBtn);
+
+const logOutBtn = document.createElement("a")
+logOutBtn.classList.add("nav-btn");
+logOutBtn.innerHTML = `LOG OUT`;
+logOutBtn.setAttribute("id", "logout");
+nav.appendChild(logOutBtn);
+
+} else {
+    const loginBtn = document.createElement("a")
+loginBtn.classList.add("nav-btn");
+loginBtn.innerHTML = `LOGIN`;
+loginBtn.addEventListener("click", function() {
+    const loginModal = new bootstrap.Modal(document.getElementById("loginModal"));
+    loginModal.show();
+});
+nav.appendChild(loginBtn);
+
+const registerBtn = document.createElement("a")
+registerBtn.classList.add("btn", "custom-btn", "m-2");
+registerBtn.innerHTML = `REGISTER`;
+registerBtn.addEventListener("click", function() {
+    const registerModal = new bootstrap.Modal(document.getElementById("registerModal"));
+    registerModal.show();
+});
+nav.appendChild(registerBtn);
+}
+});
+
 
   // Hamburger menu
-//   document.addEventListener("DOMContentLoaded", function() {
-//     const hamburgerMenu = document.querySelector(".hamburger-menu");
-//     const navMenu = document.querySelector(".nav");
-//     const header = document.querySelector("header");
-//     const navUl = document.querySelector(".mob-menu");
-//     const topDiv = this.documentElement.querySelector(".custom-height");
-
-//     hamburgerMenu.addEventListener("click", function() {
-//         navMenu.classList.toggle("d-none");
-//     });
-
-//     checkScreenSize();
-
-//     window.addEventListener("resize", checkScreenSize);
-
-//     function checkScreenSize() {
-//         const screenWidth = window.innerWidth;
-
-//         if (screenWidth <= 750) {
-//             hamburgerMenu.classList.remove("d-none");
-//             navMenu.classList.add("d-none");
-//             header.classList.remove("mx-5");
-//             navUl.classList.add("mob-menu");
-//             header.classList.add("fixed-mobile");
-//             topDiv.classList.remove("d-none");
-//         } else {
-//             hamburgerMenu.classList.add("d-none");
-//             navMenu.classList.remove("d-none");
-//             navUl.classList.remove("mob-menu");
-//             header.classList.remove("fixed-mobile");
-//             header.classList.add("mx-5");
-//             topDiv.classList.add("d-none");
-//         }
-//     }
-// });
-
-  
-
-document.addEventListener("DOMContentLoaded", function() {
-    const hamburgerMenu = document.querySelector(".hamburger-menu");
+  document.addEventListener("DOMContentLoaded", function() {
+    const hamburgerMenu = document.querySelector(".hamburger-menu svg");
     const navMenu = document.querySelector(".nav");
     const header = document.querySelector("header");
     const navUl = document.querySelector(".mob-menu");
     const topDiv = document.querySelector(".custom-height");
 
     hamburgerMenu.addEventListener("click", function() {
-        navUl.classList.toggle("d-none");
+        navMenu.classList.toggle("d-none");
     });
 
     checkScreenSize();
@@ -76,20 +68,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function checkScreenSize() {
         const screenWidth = window.innerWidth;
-        console.log("Screen width:", screenWidth);
 
         if (screenWidth <= 750) {
-            console.log("Screen width is less than or equal to 750");
             hamburgerMenu.classList.remove("d-none");
-            navUl.classList.add("d-none");
+            navMenu.classList.add("d-none");
             header.classList.remove("mx-5");
-            navMenu.classList.add("fixed-mobile");
+            navUl.classList.add("mob-menu");
+            header.classList.add("fixed-mobile");
             topDiv.classList.remove("d-none");
         } else {
-            console.log("Screen width is greater than 750");
             hamburgerMenu.classList.add("d-none");
-            navUl.classList.remove("d-none");
-            navMenu.classList.remove("fixed-mobile");
+            navMenu.classList.remove("d-none");
+            navUl.classList.remove("mob-menu");
+            header.classList.remove("fixed-mobile");
             header.classList.add("mx-5");
             topDiv.classList.add("d-none");
         }
