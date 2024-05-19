@@ -1,0 +1,53 @@
+$primary: #0D0630; 
+$secondary: #DACAAA;
+$tertiary: #FFFBF6;
+$quaternary :#544B3D;
+
+.primary {
+    color: $primary;
+}
+
+.secondary {
+    color: $secondary;
+}
+
+.tertiary {
+    color: $tertiary;
+}
+
+.quaternary {
+    color: $quaternary;
+}
+
+
+@font-face {
+    font-family: "assistant";
+    src: url(../../fonts/Assistant-VariableFont_wght.ttf);
+  }
+
+h1, h2, h3, h4, h5, h6, p {
+    font-family: "assistant";
+    color: $primary;
+    margin: 0px !important;
+}
+
+body {
+    background-color: $tertiary;
+}
+
+a {
+    text-decoration: none;
+}
+
+.background-color {
+    background-color: $tertiary;
+}
+
+
+.color-primary {
+    color: $primary;
+}
+
+.border-bottom {
+    border-color: $secondary !important;
+}

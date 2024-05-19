@@ -1,4 +1,4 @@
-import { updateAvatar, fetchProfile } from "../js/modules/api.js";
+import { updateAvatar, fetchProfile } from "../modules/api.js";
 import { displayUserProfile } from "./profile.js";
 
 document.addEventListener("DOMContentLoaded", async () => {

@@ -259,17 +259,17 @@ listingDisplay.appendChild(inputContainer);
 
 if (loggedIn) {
   const bidInput = document.createElement("input");
-  bidInput.classList.add("form-control", "w-50", "text-center");
+  bidInput.classList.add("form-control", "w-50", "text-center", "border-custom", "inputs");
   bidInput.setAttribute("type", "number");
-  bidInput.setAttribute("id", "bid-input");
-  bidInput.setAttribute("name", "bid-input");
+  bidInput.setAttribute("id", "bidInput");
+  bidInput.setAttribute("name", "bidInput");
   bidInput.setAttribute("min", listing.price);
   bidInput.setAttribute("placeholder", "Enter your bid");
   inputContainer.appendChild(bidInput);
 
   const submitBidBtn = document.createElement("button");
-  submitBidBtn.classList.add("btn", "custom-btn", "my-2");
-  submitBidBtn.setAttribute("id", "bid-button");
+  submitBidBtn.classList.add("btn", "custom-btn", "m-2", "px-2");
+  submitBidBtn.setAttribute("id", "bidBtn");
   submitBidBtn.setAttribute("type", "button");
   submitBidBtn.textContent = "Place Bid";
   inputContainer.appendChild(submitBidBtn);
@@ -279,20 +279,6 @@ if (loggedIn) {
   loginMessage.textContent = "Please log in to place a bid or view bid history.";
   inputContainer.appendChild(loginMessage);
 }
-
-
-// const bidInput = document.createElement("input");
-// bidInput.classList.add("form-control", "m-3", "border-custom", "inputs");
-// bidInput.setAttribute("type", "number");
-// bidInput.setAttribute("placeholder", "Enter your bid amount");
-// bidInput.setAttribute("id", "bidInput");
-// inputContainer.appendChild(bidInput);
-
-// const submitBtn = document.createElement("button");
-// submitBtn.classList.add("btn", "custom-btn", "my-3", "px-3");
-// submitBtn.setAttribute("id", "bidBtn");
-// submitBtn.innerHTML = "BID";
-// inputContainer.appendChild(submitBtn);
 
 window.addEventListener('resize', function() {
     const screenWidth = window.innerWidth;

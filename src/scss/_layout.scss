@@ -1,0 +1,42 @@
+.fixed-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: $tertiary;
+}
+
+#listings-top {
+    display: flex;
+    justify-content: space-between;
+    
+
+
+    @media (max-width: 950px) {
+
+        flex-wrap: wrap;
+
+        ul {
+            order: 3; 
+            margin: auto;
+        }
+    }
+
+    @media (max-width: 620px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    @media (max-width: 374px) {
+        ul a {
+            padding: 5px;
+        }
+    }
+}
+
+.custom-height {
+    height: 80px;
+}
