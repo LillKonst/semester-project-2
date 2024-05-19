@@ -11,7 +11,7 @@ This is an auction website where you can register, upload listings and bid on ot
 ## Build width
 - HTML 
 - SCSS / Bootstrap
-- - JavaScript
+- JavaScript
 
 ## Getting started
 To get a closer look at this website you can 
