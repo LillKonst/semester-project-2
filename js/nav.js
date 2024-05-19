@@ -1,4 +1,4 @@
-import { logout } from "./logout.js";
+import { logout } from "./auth/logout.js";
 
 // header logged in or out
 document.addEventListener("DOMContentLoaded", function() {
@@ -20,7 +20,7 @@ const profileBtn = document.createElement("a")
 profileBtn.classList.add("nav-btn");
 profileBtn.innerHTML = `PROFILE`;
 profileBtn.addEventListener("click", () => {
-    window.location.href = `html/profile/index.html`;
+    window.location.href = `../../../html/profile/index.html`;
   });
 nav.appendChild(profileBtn);
 

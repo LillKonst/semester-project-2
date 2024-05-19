@@ -177,7 +177,7 @@
 
 
 
-import { getAllListings } from "./modules/api.js";
+import { getAllListings } from "../modules/api.js";
 
 export { displayListings };
 

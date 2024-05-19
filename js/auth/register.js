@@ -1,5 +1,5 @@
 import { login } from "./login.js";
-import { API_URL } from "./modules/api.js";
+import { API_URL } from "../modules/api.js";
 
 document.getElementById("register").addEventListener("click", function (event) {
     console.log("Register button clicked!");

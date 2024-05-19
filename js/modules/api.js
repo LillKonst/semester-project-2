@@ -1,5 +1,5 @@
 import { storeToken, getToken, APIKey } from "../modules/auth.js"
-import { listingsPerPage } from "../home.js";
+import { listingsPerPage } from "../home/home.js";
 
 export { getAllListings };
 export { fetchProfile };
@@ -8,7 +8,7 @@ export { createListing };
 export { updateAvatar };
 export { getListingSpecific };
 export { listingBid };
-export { fetchListingsByBids };
+//export { fetchListingsByBids };
 export { getListingsSearch };
 export { API_URL }; 
 
@@ -177,29 +177,29 @@ async function listingBid(listingId, bidData) {
 
 // Fetch Listings by bids
 
-async function fetchListingsByBids (username) {
+// async function fetchListingsByBids (username) {
    
 
-  const response = await fetch(
-    `${API_URL}/auction/profiles/${username}/bids`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-        "X-Noroff-API-Key": APIKey,
-      },
-    }
-  );
+//   const response = await fetch(
+//     `${API_URL}/auction/profiles/${username}/bids`,
+//     {
+//       method: "GET",
+//       headers: {
+//         Authorization: `Bearer ${getToken()}`,
+//         "X-Noroff-API-Key": APIKey,
+//       },
+//     }
+//   );
 
 
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw new Error(`Could not post comment: ${errorData.message}`);
-  }
+//   if (!response.ok) {
+//     const errorData = await response.json();
+//     throw new Error(`Could not post comment: ${errorData.message}`);
+//   }
 
-  return await response.json();
+//   return await response.json();
 
-}
+// }
 
 // Search listings
 async function getListingsSearch(searchTerm) {

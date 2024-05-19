@@ -28,6 +28,22 @@ body {
   background-color: #FFFBF6;
 }
 
+a {
+  text-decoration: none;
+}
+
+.background-color {
+  background-color: #FFFBF6;
+}
+
+.color-primary {
+  color: #0D0630;
+}
+
+.border-bottom {
+  border-color: #DACAAA !important;
+}
+
 .nav-btn {
   font-family: "assistant";
   font-size: 1em;
@@ -76,11 +92,10 @@ body {
   font-family: "assistant";
   border-color: #DACAAA;
 }
-.custom-btn:hover {
-  background-color: #DACAAA;
+.custom-btn:hover, .custom-btn:focus, .custom-btn:active {
   color: #0D0630;
   font-family: "assistant";
-  border-color: #DACAAA;
+  border-color: #DACAAA !important;
 }
 
 .card-custom {
@@ -105,27 +120,15 @@ body {
 .inputs {
   background-color: #FFFBF6;
 }
+.inputs:focus {
+  background-color: #FFFBF6;
+  border-color: #DACAAA !important;
+  box-shadow: 0 0 0 0.25rem rgba(218, 202, 170, 0.25) !important;
+}
 
 .profile-img-container {
   width: 100px;
   height: 100px;
-}
-
-a {
-  text-decoration: none;
-}
-
-.background-color {
-  background-color: #FFFBF6;
-}
-
-.login-btn {
-  color: #0D0630;
-  text-decoration: none;
-}
-.login-btn:hover {
-  color: #0D0630;
-  text-decoration: underline;
 }
 
 .custom-line {
@@ -156,12 +159,28 @@ a {
   }
 }
 
-.border-bottom {
-  border-color: #DACAAA !important;
+.custom-thumbnail {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
 }
 
-.color-primary {
-  color: #0D0630;
+.search-thumbnail {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+}
+
+.main-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.live-auction {
+  bottom: 40px;
+  border-radius: 5px 0px 0px 5px;
+  cursor: pointer;
 }
 
 .mob-menu {
@@ -218,32 +237,8 @@ a {
   }
 }
 
-.custom-thumbnail {
-  height: 100px;
-  width: 100px;
-  object-fit: cover;
-}
-
-.search-thumbnail {
-  height: 50px;
-  width: 50px;
-  object-fit: cover;
-}
-
 .custom-height {
   height: 80px;
-}
-
-.main-img {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-}
-
-.live-auction {
-  bottom: 40px;
-  border-radius: 5px 0px 0px 5px;
-  cursor: pointer;
 }
 
 /*# sourceMappingURL=styles.css.map */

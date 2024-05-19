@@ -1,5 +1,5 @@
-import { fetchProfile, fetchListingsByUser, fetchListingsByBids } from "./modules/api.js";
-import { MAX_TEXT_LENGTH } from "../js/home.js";
+import { fetchProfile, fetchListingsByUser } from "../modules/api.js";
+import { MAX_TEXT_LENGTH } from "../home/home.js";
 
 export { displayUserProfile };
 
