@@ -76,7 +76,6 @@ async function fetchProfile(username) {
 
   // Create new listing
   async function createListing(listingData) {
-    console.log(JSON.stringify(listingData));
     const response = await fetch(`${API_URL}/auction/listings`,  {
         method: "Post",
         headers: {
@@ -173,33 +172,6 @@ async function listingBid(listingId, bidData) {
 
   return await response.json();
 }
-
-
-// Fetch Listings by bids
-
-// async function fetchListingsByBids (username) {
-   
-
-//   const response = await fetch(
-//     `${API_URL}/auction/profiles/${username}/bids`,
-//     {
-//       method: "GET",
-//       headers: {
-//         Authorization: `Bearer ${getToken()}`,
-//         "X-Noroff-API-Key": APIKey,
-//       },
-//     }
-//   );
-
-
-//   if (!response.ok) {
-//     const errorData = await response.json();
-//     throw new Error(`Could not post comment: ${errorData.message}`);
-//   }
-
-//   return await response.json();
-
-// }
 
 // Search listings
 async function getListingsSearch(searchTerm) {

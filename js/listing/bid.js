@@ -14,18 +14,11 @@ document.addEventListener("elementsReady", async () => {
     async function handleBid() {
         try {
             const bidAmount = getBidAmount();
-            console.log('Bid amount:', bidAmount);
-
             const currentBidAmount = await getCurrentBidAmount();
-            console.log('Current bid amount:', currentBidAmount);
-
-            console.log('Validating bid amount...');
             validateBidAmount(bidAmount, currentBidAmount);
 
             await placeBid(bidAmount);
-            console.log('Bid placed successfully');
-
-            console.log('Reloading page...');
+    
             window.location.reload();
         } catch (error) {
             handleError(error);
@@ -55,9 +48,8 @@ document.addEventListener("elementsReady", async () => {
         try {
             const bidData = { amount: bidAmount };
             const response = await listingBid(listingId, bidData);
-            console.log('Bid response:', response);
         } catch(error) {
-            console.log('An error occured:', error);
+            console.error('An error occured:', error);
         }
     }
 
