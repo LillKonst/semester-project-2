@@ -165,7 +165,7 @@ async function displayListing(listing) {
     
     
     const listingDescription = document.createElement("p");
-    listingDescription.classList.add("card-text", "p-3");
+    listingDescription.classList.add("card-text", "p-1", "p-sm-3");
     listingDescription.innerHTML = listing.description || "No Description";
     listingDetails.appendChild(listingDescription);
 
