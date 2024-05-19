@@ -64,6 +64,11 @@ body {
   border-color: #DACAAA;
   width: 250px;
 }
+@media (max-width: 300) {
+  .searchbar {
+    width: 150px;
+  }
+}
 
 .custom-btn {
   background-color: #DACAAA;
@@ -226,7 +231,19 @@ a {
 }
 
 .custom-height {
-  height: 90px;
+  height: 80px;
+}
+
+.main-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.live-auction {
+  bottom: 40px;
+  border-radius: 5px 0px 0px 5px;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=styles.css.map */

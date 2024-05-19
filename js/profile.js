@@ -34,15 +34,7 @@ async function displayUserProfile() {
 
 async function displayListingsByUser(username, isBids) {
     try {
-        let listings;
-        
-        if (isBids) {
-            listings = await fetchListingsByBids(username);
-        } else {
-            listings = await fetchListingsByUser(username);
-        }
-
-        //const listingsByUser = await fetchListingsByUser(username);
+        const listings = await fetchListingsByUser(username);
         const listingsContainer = document.getElementById("listings-container");
         listingsContainer.innerHTML = "";
 

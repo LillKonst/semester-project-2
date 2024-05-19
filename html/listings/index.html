@@ -16,42 +16,155 @@
       crossorigin="anonymous"
     ></script>
     <link rel="stylesheet" href="/dist/css/styles.css" />
+    <script src="/js/nav.js" type="module" defer></script>
+    <script src="/js/login.js" type="module" defer></script>
     <script src="/js/logout.js" type="module" defer></script>
     <script src="/js/listing/display.js" type="module" defer></script>
     <script src="/js/listing/bid.js" type="module" defer></script>
-    <script src="/js/nav.js" type="module" defer></script>
   </head>
   <body>
-    <header class="d-flex p-3 mx-5 fixed-mobile">
-      <a href="/index.html">
-        <img src="/images/logo.svg" alt="logo" class="logo" />
-      </a>
-      <ul class="nav ms-auto p-2 my-3 mob-menu">
-        <li class="nav-item">
-          <a class="nav-btn" href="../home/index.html">HOME</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-btn" href="../profile/index.html">PROFILE</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-btn" id="logout">LOG OUT</a>
-        </li>
-      </ul>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-list hamburger-menu fs-3 position-absolute top-0 end-0 m-4 me-5"
-        viewBox="0 0 16 16"
-        style="width: 2em; height: 2em"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-        />
-      </svg>
+    <header class="d-flex p-3 mx-5 header">
+      <a href="/index.html"> <img src="/images/logo.svg" alt="logo" class="logo" /> </a>
+
+      <div id="nav"></div>
+      <div  class="d-block d-md-none hamburger-menu fs-3 position-absolute top-0 end-0 m-4 me-5">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-list"
+          viewBox="0 0 16 16"
+          style="width: 2em; height: 2em"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+          />
+        </svg></div>
     </header>
+      <!-- modal login-->
+      <div
+      class="modal"
+      tabindex="-1"
+      id="loginModal"
+      aria-labelledby="loginModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header position-relative background-color">
+            <h5 class="modal-title mx-auto">LOGIN</h5>
+            <button
+              type="button"
+              class="btn-close position-absolute top-0 end-0 m-2"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body background-color">
+            <form id="loginForm">
+              <div class="mb-3">
+                <label for="loginInput1" class="form-label"
+                  >Email address</label
+                >
+                <input
+                  type="email"
+                  class="form-control border-custom inputs"
+                  id="loginInput1"
+                  placeholder="name@example.com"
+                  autocomplete="current-email"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="loginInput2" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control border-custom inputs"
+                  id="loginInput2"
+                  placeholder="Your Password"
+                  autocomplete="current-password"
+                />
+              </div>
+          </div>
+          <div class="modal-footer background-color">
+            <button type="submit" class="btn btn-primary custom-btn" id="login">
+              LOGIN
+            </button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal"
+      tabindex="-1"
+      id="registerModal"
+      aria-labelledby="registerModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header position-relative background-color">
+            <h5 class="modal-title mx-auto">REGISTER</h5>
+            <button
+              type="button"
+              class="btn-close position-absolute top-0 end-0 m-2"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body background-color">
+            <form id="registerForm">
+              <div class="mb-3">
+                <label for="registerInput1" class="form-label">Name:</label>
+                <input
+                  type="text"
+                  class="form-control border-custom inputs"
+                  id="registerInput1"
+                  placeholder="Your Name"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="registerInput2" class="form-label"
+                  >Email address</label
+                >
+                <input
+                  type="email"
+                  class="form-control border-custom inputs"
+                  id="registerInput2"
+                  placeholder="name@example.com"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="registerInput3" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control border-custom inputs"
+                  id="registerInput3"
+                  placeholder="Your Password"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="registerInput4" class="form-label">Avatar:</label>
+                <input
+                  type="text"
+                  class="form-control border-custom inputs"
+                  id="registerInput4"
+                  placeholder="Image URL"
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer background-color">
+            <button type="button" class="btn btn-primary custom-btn" id="register">
+              REGISTER
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
     <section>
       <div id="bid-history-modal" class="modal" tabindex="-1">
         <div class="modal-dialog">
@@ -81,11 +194,11 @@
     <footer class="mx-5 mt-5 p-3 row d-flex">
       <div class="container m-2 order-0"><hr class="custom-line"></div>
       <div class="container order-2 order-sm-1 col-12 col-sm-6 d-flex flex-column justify-content-center align-items-center">
-      <img src="/images/logo.svg" alt="biddings logo" class="logo"/>
+      <img src="/images/logo.svg" alt="biddings logo" class="logo px-3"/>
       <p>Org: 98765432</p>
       <p>© 2024 Biddings</p>
     </div>
-    <div class="container order-1 order-sm-2 col-12 col-sm-6 d-flex flex-column justify-content-center align-items-center">
+    <div class="container order-1 order-sm-2 col-12 col-sm-6 d-flex flex-column justify-content-center align-items-center text-center">
       <a href="#" class="btn custom-btn m-2">CONTACT US</a>
       <a href="#" class="nav-link p-1">TERMS AND CONDITIONS</a>
       <a href="#" class="nav-link p-1">MOST ASKED QUESTIONS</a>

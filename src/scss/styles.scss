@@ -35,11 +35,6 @@ body {
     background-color: $tertiary;
 }
 
-// a {
-//     color: $primary;
-//     text-decoration: none;
-// }
-
 .nav-btn {
     font-family: "assistant";
     font-size: 1em;
@@ -75,6 +70,10 @@ body {
     background-color: $tertiary;
     border-color: $secondary;
     width: 250px;
+
+    @media (max-width: 300) {
+        width: 150px;
+    }
 }
 
 .custom-btn {
@@ -175,30 +174,32 @@ a {
     color: $primary;
 }
 
-.mob-menu {
-    background-color: $secondary;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    position: absolute;
-    top: 55px;
-    right: 0; 
-    width: 300px;
-    height: 400px;
-    z-index: 999;
-    border-radius: 5px 0px 0px 5px;
-     
 
-    li {
-        padding: 20px;
-        font-size: 1.2em;
+
+        .mob-menu {
+        background-color: $secondary;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        position: absolute;
+        top: 55px;
+        right: 0; 
+        width: 300px;
+        height: 400px;
+        z-index: 999;
+        border-radius: 5px 0px 0px 5px;
+         
+    
+        li {
+            padding: 20px;
+            font-size: 1.2em;
+        }
+
     }
 
-}
 
-
-.fixed-mobile {
+    .fixed-mobile {
     position: fixed;
     top: 0;
     left: 0;
@@ -206,6 +207,8 @@ a {
     z-index: 1000;
     background-color: $tertiary;
 }
+
+
 
 #listings-top {
     display: flex;
@@ -250,5 +253,18 @@ a {
 }
 
 .custom-height {
-    height: 90px;
+    height: 80px;
+}
+
+
+.main-img {
+    width: 100%;
+    height: 400px; 
+    object-fit: cover;
+}
+
+.live-auction {
+    bottom: 40px; 
+    border-radius: 5px 0px 0px 5px;
+    cursor: pointer;
 }
