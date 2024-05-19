@@ -1,6 +1,6 @@
 import { getListingSpecific } from "../modules/api.js";
 
-const username = localStorage.getItem(`userName`);
+const loggedIn = localStorage.getItem("username");
 
 function getListingIdFromQuery() {
   return new URLSearchParams(window.location.search).get("id");
@@ -209,7 +209,7 @@ async function displayListing(listing) {
     }
     bidBox.appendChild(currentBid);
 
-    if (username) {
+    if (loggedIn) {
     const bidHistory = document.createElement("p");
     bidHistory.classList.add("text-center", "nav-btn", "p-1");
     bidHistory.innerHTML = `Bid history (${listing._count.bids})`;
@@ -257,7 +257,7 @@ const inputContainer = document.createElement("div");
 inputContainer.classList.add("col-12", "col-sm-8", "d-flex", "align-items-center", "flex-column", "flex-sm-row", "mx-3");
 listingDisplay.appendChild(inputContainer);
 
-if (username) {
+if (loggedIn) {
   const bidInput = document.createElement("input");
   bidInput.classList.add("form-control", "w-50", "text-center");
   bidInput.setAttribute("type", "number");

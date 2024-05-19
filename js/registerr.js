@@ -15,7 +15,7 @@ document.getElementById("register").addEventListener("click", function (event) {
             login(email, password).then((loggedIn) => {
                 console.log("Logged in:", loggedIn);
                 if (loggedIn) {
-                    window.location.href = "/html/home/index.html";
+                    window.location.href = "/index.html";
                 } else {
                     alert("Invalid email or password. Please try again.");
                 }
