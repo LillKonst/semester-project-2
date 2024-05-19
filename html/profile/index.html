@@ -26,7 +26,7 @@
       <a href="/index.html"> <img src="/images/logo.svg" alt="logo" class="logo" /> </a>
 
       <div id="nav"></div>
-      <div  class="d-block d-md-none hamburger-menu fs-3 position-absolute top-0 end-0 m-4 me-5">
+      <div aria-label="Toggle navigation" class="d-block d-md-none hamburger-menu fs-3 position-absolute top-0 end-0 m-4 me-5">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -35,6 +35,7 @@
           class="bi bi-list"
           viewBox="0 0 16 16"
           style="width: 2em; height: 2em"
+          
         >
           <path
             fill-rule="evenodd"
@@ -95,7 +96,7 @@
                 <img id="profileImage" src="" alt="" class="img rounded-circle profile-img-container">
               </div>
               <div class="d-flex flex-column m-2 p-2">
-              <h3 id="userName"> </h3>
+              <h3 id="userName">Username</h3>
               <p id="credit"></p>
               <button type="button" class="btn custom-btn" data-bs-toggle="modal"
               data-bs-target="#updateModal"> Edit Profile</button>
