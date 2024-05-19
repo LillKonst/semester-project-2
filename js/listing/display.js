@@ -209,6 +209,7 @@ async function displayListing(listing) {
     }
     bidBox.appendChild(currentBid);
 
+    if (username) {
     const bidHistory = document.createElement("p");
     bidHistory.classList.add("text-center", "nav-btn", "p-1");
     bidHistory.innerHTML = `Bid history (${listing._count.bids})`;
@@ -243,6 +244,10 @@ async function displayListing(listing) {
     });
 });
 
+    } else {
+
+    };
+
 const errorMessage = document.createElement("p");
 errorMessage.setAttribute ("id", "bidError");
 errorMessage.classList.add("p-1", "text-center");
@@ -252,19 +257,42 @@ const inputContainer = document.createElement("div");
 inputContainer.classList.add("col-12", "col-sm-8", "d-flex", "align-items-center", "flex-column", "flex-sm-row", "mx-3");
 listingDisplay.appendChild(inputContainer);
 
+if (username) {
+  const bidInput = document.createElement("input");
+  bidInput.classList.add("form-control", "w-50", "text-center");
+  bidInput.setAttribute("type", "number");
+  bidInput.setAttribute("id", "bid-input");
+  bidInput.setAttribute("name", "bid-input");
+  bidInput.setAttribute("min", listing.price);
+  bidInput.setAttribute("placeholder", "Enter your bid");
+  inputContainer.appendChild(bidInput);
 
-const bidInput = document.createElement("input");
-bidInput.classList.add("form-control", "m-3", "border-custom", "inputs");
-bidInput.setAttribute("type", "number");
-bidInput.setAttribute("placeholder", "Enter your bid amount");
-bidInput.setAttribute("id", "bidInput");
-inputContainer.appendChild(bidInput);
+  const submitBidBtn = document.createElement("button");
+  submitBidBtn.classList.add("btn", "custom-btn", "my-2");
+  submitBidBtn.setAttribute("id", "bid-button");
+  submitBidBtn.setAttribute("type", "button");
+  submitBidBtn.textContent = "Place Bid";
+  inputContainer.appendChild(submitBidBtn);
+} else {
+  const loginMessage = document.createElement("p");
+  loginMessage.classList.add("text-center", "m-2", "fs-bold");
+  loginMessage.textContent = "Please log in to place a bid or view bid history.";
+  inputContainer.appendChild(loginMessage);
+}
 
-const submitBtn = document.createElement("button");
-submitBtn.classList.add("btn", "custom-btn", "my-3", "px-3");
-submitBtn.setAttribute("id", "bidBtn");
-submitBtn.innerHTML = "BID";
-inputContainer.appendChild(submitBtn);
+
+// const bidInput = document.createElement("input");
+// bidInput.classList.add("form-control", "m-3", "border-custom", "inputs");
+// bidInput.setAttribute("type", "number");
+// bidInput.setAttribute("placeholder", "Enter your bid amount");
+// bidInput.setAttribute("id", "bidInput");
+// inputContainer.appendChild(bidInput);
+
+// const submitBtn = document.createElement("button");
+// submitBtn.classList.add("btn", "custom-btn", "my-3", "px-3");
+// submitBtn.setAttribute("id", "bidBtn");
+// submitBtn.innerHTML = "BID";
+// inputContainer.appendChild(submitBtn);
 
 window.addEventListener('resize', function() {
     const screenWidth = window.innerWidth;
