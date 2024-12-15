@@ -13,10 +13,26 @@ This is an auction website where you can register, upload listings and bid on ot
 - SCSS / Bootstrap
 - JavaScript
 
-## Getting started
-To get a closer look at this website you can 
-1. Clone my github repo: https://github.com/LillKonst/semester-project-2
-2. Open website with the Netlify app using this link: https://biddings.netlify.app
+
+
+## Getting Started
+### Installing
+
+### Clone the repo:
+
+<pre> git clone https://github.com/LillKonst/semester-project-2 </pre>
+
+### Install the dependencies:
+
+<pre> npm install </pre>
+
+###Running
+To run the app, run the following commands:
+
+<pre> npm run dev </pre>
+
+### You can also: 
+ Open website with the Netlify app using this link: https://biddings.netlify.app
 
 ## Contact 
 If you are interessted in more details or want to get in contact with me, you are welcome to sending me an email at konstlillkristine@gmail.com
